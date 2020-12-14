@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>我的创建</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+    </style>
+</head>
+
+
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-red mdui-appbar-with-toolbar">
+
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer', swipe: true}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <a class="mdui-typo-title" style="margin-left: -10px">我的课表</a>
+        <div class="mdui-toolbar-spacer"></div>
+        <button class="mdui-btn" mdui-dialog="{target: '#create_table',modal:true}">创建</button>
+    </div>
+</header>
+
+<div class="mdui-drawer mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list" mdui-collapse="{accordion: true}">
+        <li class="mdui-list-item mdui-ripple" onclick="window.open('/index.php/index/index/home','_self')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+            <div class="mdui-list-item-content">首页</div>
+        </li>
+
+        <a href="/index.php/index/call/classlist">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                <div class="mdui-list-item-content">签到</div>
+            </li>
+        </a>
+
+        <a href="/index.php/index/Annal/index">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                <div class="mdui-list-item-content">查看签到记录</div>
+            </li>
+        </a>
+
+    </ul>
+    <div class="mdui-divider"></div>
+    <ul class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+        <li class="mdui-list-item mdui-ripple" mdui-dialog="{target: '#info'}">
+            <i class="mdui-list-item-icon mdui-icon material-icons">info</i>
+            <div class="mdui-list-item-content">关于</div>
+        </li>
+
+    </ul>
+</div>
+<div class="mdui-dialog" id="info">
+    <div class="mdui-dialog-title">关于</div>
+    <div class="mdui-dialog-content">Author：小嵩</div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+    </div>
+</div>
+
+<div class=" mdui-m-t-5 mdui-m-l-1 mdui-m-r-1" >
+    <!-- CONTENT -->
+    <div class="tips mdui-card mdui-hidden">
+        <p class="mdui-text-center mdui-typo ">你还未创建过课表 快去创建吧</p>
+
+    </div>
+    <div class="mdui-table-fluid mdui-hidden">
+        <table class="mdui-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>周一</th>
+                <th>周二</th>
+                <th>周三</th>
+                <th>周四</th>
+                <th>周五</th>
+                <th>周六</th>
+                <th>周日</th>
+            </tr>
+            </thead>
+            <tbody class="table">
+
+<!--            <tr class="row_2">-->
+<!--                <td>2</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_3">-->
+<!--                <td>3</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_4">-->
+<!--                <td>4</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_5">-->
+<!--                <td>5</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_6">-->
+<!--                <td>6</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_7">-->
+<!--                <td>7</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_8">-->
+<!--                <td>8</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_9">-->
+<!--                <td>9</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_10">-->
+<!--                <td>10</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_11">-->
+<!--                <td>11</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="row_12">-->
+<!--                <td>12</td>-->
+<!--                <td class="mdui-ripple col_1">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_2">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_3">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_4">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_5">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_6">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="mdui-ripple col_7">-->
+<!--                    <div style="width: 160px">-->
+<!--                        <div class="mdui-typo-subheading-opacity class">班级</div>-->
+<!--                        <div class="mdui-typo-caption-opacity classroom">教室</div>-->
+<!--                        <small class="mdui-typo-caption-opacity time">时间</small>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- CONTENT -->
+
+<!--    创建框-->
+    <div class="mdui-dialog" id="create_table">
+        <div class="mdui-progress mdui-progress_create mdui-hidden">
+            <div class="mdui-progress-indeterminate"></div>
+        </div>
+        <div class="mdui-dialog-title">添加课表<button class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '本次表会全部替换上次表'}"><i class="mdui-icon material-icons">help_outline</i></button></div>
+        <div class="mdui-dialog-content">
+            <div>
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">课程</label>
+                    <input class="mdui-textfield-input input_course" type="text" />
+                </div>
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">教室</label>
+                    <input class="mdui-textfield-input input_classroom" type="text" />
+                </div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-textfield">
+                            <label class="mdui-textfield-label">上课时间</label>
+                            <input class="mdui-textfield-input input_start_time" type="time" />
+                        </div>
+                    </div>
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-textfield">
+                            <label class="mdui-textfield-label">下课时间</label>
+                            <input class="mdui-textfield-input input_end_time" type="time" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <label class="mdui-textfield-label">日期</label>
+                        <select class="mdui-select input_date"  mdui-select="{position: 'bottom'}">
+                            <option value="1">星期一</option>
+                            <option value="2">星期二</option>
+                            <option value="3">星期三</option>
+                            <option value="4">星期四</option>
+                            <option value="5">星期五</option>
+                            <option value="6">星期六</option>
+                            <option value="7">星期日</option>
+                        </select>
+                    </div>
+                    <div class="mdui-col-xs-6">
+                        <label class="mdui-textfield-label">班级</label>
+                        <select class="class_id mdui-select" id="class">
+
+                            <!-- 占位-->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="tables">
+<!--                <div class="mdui-typo-body-2-opacity" >-->
+<!--                    <div class="mdui-divider mdui-m-t-3 mdui-m-b-2"></div>-->
+<!--                    <div>-->
+<!--                        <div >星期二</div>-->
+<!--                        <div >计算机应用与维修</div>-->
+<!--                        <div >08:25:23&#45;&#45;10:25:23</div>-->
+<!--                        <div >数艺409教室</div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+            <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple create">创建</button>
+                <button class="mdui-btn mdui-ripple add">添加</button>
+                <button class="mdui-btn mdui-ripple" mdui-dialog-close>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    //初始化页面
+    function init(){
+        $.getJSON('/index.php/index/curriculum/init',function (json) {
+            if(json.code){
+                $('.tips').addClass('mdui-hidden');
+                $('.mdui-table-fluid').removeClass('mdui-hidden');
+                let curriculum = json['res']['curriculums']; //课表数组
+              //  console.log(curriculum);
+                var max = curriculum[0].length;
+                for(let i = 0;i<curriculum.length;i++){
+                    if(max < curriculum[i].length){
+                        max = curriculum[i].length;
+                    }
+                }
+                $('.table').html('');
+                for(let t= 0;t<max;t++){
+                    $('.table').append(` <tr class="row_${t+1}">
+                        <td>${t+1}</td>
+                        <td class="mdui-ripple col_1">
+                           <div style="width: 160px">
+                               <div class="mdui-typo-subheading-opacity class"></div>
+                               <div class="mdui-typo-caption-opacity classroom"></div>
+                               <small class="mdui-typo-caption-opacity time"></small>
+                           </div>
+                        </td>
+                        <td class="mdui-ripple col_2">
+                            <div style="width: 160px">
+                                <div class="mdui-typo-subheading-opacity class"></div>
+                                <div class="mdui-typo-caption-opacity classroom"></div>
+                                <small class="mdui-typo-caption-opacity time"></small>
+                            </div>
+                        </td>
+                        <td class="mdui-ripple col_3">
+                            <div style="width: 160px">
+                                <div class="mdui-typo-subheading-opacity class"></div>
+                                <div class="mdui-typo-caption-opacity classroom"></div>
+                                <small class="mdui-typo-caption-opacity time"></small>
+                            </div>
+                        </td>
+                        <td class="mdui-ripple col_4">
+                            <div style="width: 160px">
+                                <div class="mdui-typo-subheading-opacity class"></div>
+                                <div class="mdui-typo-caption-opacity classroom"></div>
+                                <small class="mdui-typo-caption-opacity time"></small>
+                            </div>
+                        </td>
+                        <td class="mdui-ripple col_5">
+                            <div style="width: 160px">
+                                <div class="mdui-typo-subheading-opacity class"></div>
+                                <div class="mdui-typo-caption-opacity classroom"></div>
+                                <small class="mdui-typo-caption-opacity time"></small>
+                            </div>
+                        </td>
+                        <td class="mdui-ripple col_6">
+                            <div style="width: 160px">
+                                <div class="mdui-typo-subheading-opacity class"></div>
+                                <div class="mdui-typo-caption-opacity classroom"></div>
+                                <small class="mdui-typo-caption-opacity time"></small>
+                            </div>
+                        </td>
+                        <td class="mdui-ripple col_7">
+                            <div style="width: 160px">
+                                <div class="mdui-typo-subheading-opacity class"></div>
+                                <div class="mdui-typo-caption-opacity classroom"></div>
+                                <small class="mdui-typo-caption-opacity time"></small>
+                            </div>
+                        </td>
+                    </tr>`);
+                }
+                for(let i = 0;i<curriculum.length;i++){
+                    for(let j= 0;j<curriculum[i].length;j++){
+                        init_data(curriculum[i][j],j,i);
+                    }
+                }
+            }else {
+                $('.tips').removeClass('mdui-hidden');
+                mdui.snackbar({
+                    message:json.meg
+                });
+            }
+        });
+    }
+
+    function init_data(curriculum,row,col) {
+            $('.row_'+(row+1)+' > .col_'+(col+1)+' > div > .class').text("班级:"+curriculum['class']);
+            $('.row_'+(row+1)+' > .col_'+(col+1)+' > div > .classroom').text("教室:"+curriculum['classroom']);
+            $('.row_'+(row+1)+' > .col_'+(col+1)+' > div > .time').text("时间:"+curriculum['start_time']+'--'+curriculum['end_time']);
+    };
+
+   init();
+
+    /**
+     *  获取当前账号带领的班级 循环到下拉列表提供选择用
+     */
+    $.getJSON('/index.php/index/call/json',function (json) {
+        json = json.res;
+        $.each(json,function (i) {
+            $('.class_id').append('<option value="'+ json[i].classid+'">'+ json[i].classname+'</option>');
+        });
+        $('.class_id').attr('mdui-select',"{position: 'bottom'}");
+        mdui.mutation()
+    })
+
+      //课表设定 预添加
+        var curriculums= [];
+      //周一到周日课表
+        var monday = [];
+        var tuesday = [];
+        var wednesday = [];
+        var thursday = [];
+        var friday = [];
+        var saturday = [];
+        var sunday = [];
+
+        $('.add').click(function () {
+            var course = $('.input_course').val();
+            var classroom = $('.input_classroom').val();
+            var start_time = $('.input_start_time').val();
+            var end_time = $('.input_end_time').val();
+            var class_id = $('#class').val();
+            var class_text = $('#class option:selected').text();
+            var date = $('.input_date').val();
+            var date_text = $('.input_date option:selected').text();
+            if (!(course != "" && classroom != "" && start_time !="" && end_time != "" && date != "" && class_id != "")){
+                mdui.snackbar({
+                    message: "参数不能为空"
+                });
+                return;
+            }
+            startTime= Date.parse("2020-11-19 "+start_time);
+            endTime= Date.parse("2020-11-19 "+end_time);
+            if(startTime > endTime){
+                mdui.snackbar({
+                    message: "上课时间不能大于下课时间"
+                });
+                return;
+            }
+            if(startTime == endTime){
+                mdui.snackbar({
+                    message: "上课时间不能等于下课时间"
+                });
+                return;
+            }
+            //数据准备部分
+            switch (date) {
+                case '1':isdate(monday,date_text,class_text,{"date":date,"course":course,"class":class_id,"classroom":classroom,"start_time":start_time,"end_time":end_time});break;
+                case '2':isdate(tuesday,date_text,class_text,{"date":date,"course":course,"class":class_id,"classroom":classroom,"start_time":start_time,"end_time":end_time});break;
+                case '3':isdate(wednesday,date_text,class_text,{"date":date,"course":course,"class":class_id,"classroom":classroom,"start_time":start_time,"end_time":end_time});break;
+                case '4':isdate(thursday,date_text,class_text,{"date":date,"course":course,"class":class_id,"classroom":classroom,"start_time":start_time,"end_time":end_time});break;
+                case '5':isdate(friday,date_text,class_text,{"date":date,"course":course,"class":class_id,"classroom":classroom,"start_time":start_time,"end_time":end_time});break;
+                case '6':isdate(saturday,date_text,class_text,{"date":date,"course":course,"class":class_id,"classroom":classroom,"start_time":start_time,"end_time":end_time});break;
+                case '7':isdate(sunday,date_text,class_text,{"date":date,"course":course,"class":class_id,"classroom":classroom,"start_time":start_time,"end_time":end_time});break;
+                    default:mdui.snackbar({
+                        message: "请勿违规操作"
+                    });
+            }
+        });
+
+        //时间判断
+        function isdate(week,date_text,class_text,json){
+            if(week.length){
+                upendtTime= Date.parse("2020-11-19 "+week[week.length-1].end_time);  //上节课下课时间
+                nextstartTime= Date.parse("2020-11-19 "+json.start_time);  //新节课上课时间
+                if(upendtTime > nextstartTime){
+                    mdui.snackbar({
+                        message: "上节课下课时间不能大于下一节课上课时间"
+                    });
+                }else{
+                    week.push(json);
+                    $('.tables').append(`<div class="mdui-typo-body-2-opacity a_course" >
+                    <div class="mdui-divider mdui-m-t-3 mdui-m-b-2"></div>
+                    <div>
+                        <div>序号:${json.date}/${week.length}<button class="delete_course mdui-btn mdui-btn-icon mdui-ripple mdui-float-right"><i class=" mdui-text-color-theme-secondary mdui-icon material-icons">delete</i></button></div>
+                        <div><small class="mdui-hidden week">${json.date}</small><small class="mdui-hidden number">${week.length}</small>日期：${date_text}</div>
+                        <div>班级：${class_text}</div>
+                        <div>课程：${json.course}</div>
+                        <div>时间：${json.start_time}--${json.end_time}</div>
+                        <div>教室：${json.classroom}</div>
+                    </div>
+                    </div>`);
+                    // $('.input_start_time').val('');
+                    // $('.input_end_time').val('');
+                    mdui.snackbar({
+                        message: "添加成功！"
+                    });
+                }
+            }else {
+                week.push(json);
+                $('.tables').append(`<div class="mdui-typo-body-2-opacity a_course" >
+                    <div class="mdui-divider mdui-m-t-3 mdui-m-b-2"></div>
+                    <div>
+                        <div>序号:${json.date}/${week.length}<button class="delete_course mdui-btn mdui-btn-icon mdui-ripple mdui-float-right"><i class=" mdui-text-color-theme-secondary mdui-icon material-icons">delete</i></button></div>
+                        <div><small class="mdui-hidden week">${json.date}</small><small class="mdui-hidden number">${week.length}</small>日期：${date_text}</div>
+                        <div>班级：${class_text}</div>
+                        <div>课程：${json.course}</div>
+                        <div>时间：${json.start_time}--${json.end_time}</div>
+                        <div>教室：${json.classroom}</div>
+                    </div>
+                </div>`);
+                // $('.input_start_time').val('');
+                // $('.input_end_time').val('');
+                mdui.snackbar({
+                    message: "添加成功！"
+                });
+            }
+        }
+
+        //创建课表
+        $('.create').click(function () {
+            if(monday.length||tuesday.length||wednesday.length||thursday.length||friday.length||saturday.length||sunday.length){
+                $('.mdui-progress_create').removeClass('mdui-hidden');
+                curriculums = []; //初始化一下
+                curriculums.push(monday,tuesday,wednesday,thursday,friday,saturday,sunday);
+                $.post('/index.php/index/curriculum/create',{"data":JSON.stringify(curriculums)},function (json) {
+                    if(json.code){
+                        mdui.snackbar({
+                            message: json.meg
+                        });
+                        init();
+                        var inst = new mdui.Dialog('#create_table');
+                        inst.close();
+                    }else{
+                        mdui.snackbar({
+                            message: json.meg
+                        });
+                    };
+                },'json');
+                $('.mdui-progress_create').addClass('mdui-hidden');
+            }else {
+                mdui.snackbar({
+                    message: "请先添加课表"
+                });
+            }
+        });
+
+        //删除预加载课表
+        $('.tables').on('click','.delete_course',function () {
+           var delete_date = $(this).parent().next().find('.week').text();//删除日期
+           var delete_number = $(this).parent().next().find('.number').text();//删除课时
+            switch (delete_date) {
+                    case '1':{
+                        monday.splice(delete_number-1,delete_number);
+                        $(this).closest('.a_course').remove();
+                        mdui.snackbar({
+                            message: "删除成功！"
+                        });
+                    };break;
+                    case '2':{
+                        tuesday.splice(delete_number-1,delete_number);
+                        $(this).closest('.a_course').remove();
+                        mdui.snackbar({
+                            message: "删除成功！"
+                        });
+                    };break;
+                    case '3':{
+                        wednesday.splice(delete_number-1,delete_number);
+                        $(this).closest('.a_course').remove();
+                        mdui.snackbar({
+                            message: "删除成功！"
+                        });
+                    };break;
+                    case '4':{
+                        thursday.splice(delete_number-1,delete_number);
+                        $(this).closest('.a_course').remove();
+                        mdui.snackbar({
+                            message: "删除成功！"
+                        });
+                    };break;
+                    case '5':{
+                        friday.splice(delete_number-1,delete_number);
+                        $(this).closest('.a_course').remove();
+                        mdui.snackbar({
+                            message: "删除成功！"
+                        });
+                    };break;
+                    case '6':{
+                        saturday.splice(delete_number-1,delete_number);
+                        $(this).closest('.a_course').remove();
+                        mdui.snackbar({
+                            message: "删除成功！"
+                        });
+                    };break;
+                    case '7':{
+                        sunday.splice(delete_number-1,delete_number);
+                        $(this).closest('.a_course').remove();
+                        mdui.snackbar({
+                            message: "删除成功！"
+                        });
+                    };break;
+            }
+        });
+
+</script>

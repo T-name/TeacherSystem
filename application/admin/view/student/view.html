@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>班级管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/static/js/xlsx.core.min.js"></script>
+    <!--    <script type="text/javascript" src="/static/js/xlsx.full.min.js"></script>-->
+    <style>
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+    </style>
+</head>
+
+
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-red mdui-appbar-with-toolbar">
+
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer', swipe: true}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <a class="mdui-typo-title" style="margin-left: -10px"><span class="classname">{$classname|default="班级管理"}</span></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <button class="mdui-btn print" onclick="print()">下载打印</button>
+    </div>
+</header>
+<div class="mdui-progress mdui-color-red">
+    <div class="mdui-progress-indeterminate"></div>
+</div>
+
+<div class="mdui-drawer mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list" mdui-collapse="{accordion: true}"  style="margin-bottom: 76px;">
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-list-item mdui-ripple" onclick="window.open('http://'+window.location.host+'/index.php/admin/admin/home','_self')">
+                <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+                <div class="mdui-list-item-content">首页</div>
+            </li>
+
+            <a href="/index.php/admin/check/view">
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                    <div class="mdui-list-item-content">查看签到记录</div>
+                </li>
+            </a>
+
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">people</i>
+                    <div class="mdui-list-item-content">导入信息</div>
+                    <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                </div>
+                <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    <a href="/index.php/admin/Input/index#example6-tab1">
+                        <li class="mdui-list-item mdui-ripple">单个导入</li>
+                    </a>
+                    <a href="/index.php/admin/Input/index#example6-tab2">
+                        <li class="mdui-list-item mdui-ripple">批量导入</li>
+                    </a>
+                </ul>
+            </li>
+
+        </ul>
+        <li class="mdui-divider"></li>
+        <li class="mdui-list-item mdui-ripple" mdui-dialog="{target: '#info'}">
+            <i class="mdui-list-item-icon mdui-icon material-icons">info</i>
+            <div class="mdui-list-item-content">关于</div>
+        </li>
+    </ul>
+</div>
+
+<div class="mdui-dialog" id="info">
+    <div class="mdui-dialog-title">关于</div>
+    <div class="mdui-dialog-content">Author:小嵩</div>
+    <div class="mdui-m-l-2 mdui-typo mdui-text-color-theme-disabled">
+        <p>{$version|default="2.2"}</p>
+    </div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+    </div>
+</div>
+
+<div class="mdui-container-fluid mdui-m-y-5" style="max-width: 840px">
+    <!-- CONTENT -->
+    <!--    表格-->
+    <div class="mdui-table-fluid">
+        <table class="mdui-table mdui-table-hoverable">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>姓名</th>
+                <th>学号</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody class="info_body">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class=" but_group mdui-hidden">
+        <button class=" mdui-m-t-5 action mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">确定</button>
+        <button class="mdui-btn mdui-m-t-2 mdui-float-right" mdui-menu="{target: '#demo-attr-cascade'}">更多</button>
+        <ul class="mdui-menu mdui-menu-cascade" id="demo-attr-cascade">
+            <li class="mdui-menu-item">
+                <a class="mdui-ripple action_delete">
+                        删除成员
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!--    删除成员-->
+    <div class="mdui-dialog" id="delete">
+        <div class="mdui-dialog-title">确定删除吗？</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">确定删除吗？请考虑清楚再做操作！</label>
+                <input class="mdui-textfield-input input_sid" placeholder="学号" type="text"/>
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-close>取消</button>
+            <button class="mdui-btn mdui-ripple action_delete" mdui-dialog-confirm>确定</button>
+        </div>
+    </div>
+
+    <!--                    弹出添加备注-->
+    <div class="mdui-dialog" id="exampleDialog">
+        <div class="mdui-dialog-title">添加备注</div>
+        <div class="mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">备注信息</label>
+                <textarea class="mdui-textfield-input input_note" rows="3"></textarea>
+                <label class="mdui-textfield-label infos mdui-m-t-2">备注有效时间 默认为8天</label>
+                <input class="mdui-textfield-input end_time"  type="datetime-local"/>
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-close>取消</button>
+            <button class="mdui-btn mdui-ripple confirm" mdui-dialog-confirm>确定</button>
+        </div>
+    </div>
+
+    <!--    备注信息-->
+    <div class="mdui-dialog" id="note_info">
+        <div class="mdui-dialog-title">有效备注</div>
+        <div class="mdui-dialog-content">
+            <div>
+                <p>姓名：<span class="student_note_name"></span></p>
+                <p>学号：<span class="student_note_id"></span></p>
+            </div>
+            <div class="mdui-color-red-100 mdui-m-t-2 mdui-divider"></div>
+            <div class="active_infos"  >
+
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-close>确定</button>
+        </div>
+    </div>
+
+    <!--    个人信息-->
+    <div class="mdui-dialog" id="example-4">
+       <div class="mdui-dialog-title stu_info">个人信息<button  mdui-tooltip="{content: '修改', position:'top'}" class="stu_modify_btn  mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon mdui-text-color-black-secondary material-icons">create</i></button></div>
+       <div class="stu_info">
+           <div class="mdui-dialog-content a_info">
+
+           </div>
+           <div class="mdui-dialog-actions">
+               <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+           </div>
+       </div>
+
+        <div class="mdui-dialog-title stu_info stu_modify mdui-hidden">学生信息修改</div>
+        <div class="stu_modify mdui-hidden mdui-dialog-content">
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">姓名</label>
+                <input class="mdui-textfield-input modiyf_name" type="text"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">学号</label>
+                <input class="mdui-textfield-input modify_sid"  disabled type="text"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">手机号</label>
+                <input onkeyup="value=value.replace(/[^\d]/g,'')" class="mdui-textfield-input modify_number" maxlength="11" type="text"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">家庭地址</label>
+                <input class="mdui-textfield-input modify_address"  type="text"/>
+            </div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">父母手机号</label>
+                <input onkeyup="value=value.replace(/[^\d]/g,'')" class="mdui-textfield-input modify_p_number" maxlength="11" type="text"/>
+            </div>
+            <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple close">取消</button>
+                <button class="mdui-btn mdui-ripple modify_stu_info">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTENT -->
+</div>
+</body>
+</html>
+
+
+<script>
+    var jsonData = new Array(); //json数据
+    var infos = new Array()   //预定义备注信息数组
+
+    //页面数据初始化
+    function init() {
+        $('.info_body').html('');
+        $.getJSON('/index.php/admin/student/studentInfo', function (json) {
+            //console.log(json['code']);
+            if(json['code']){
+                var note_html;   //放备注的html部分
+                $.each(json['result'], function (i, v) {
+                    jsonData[json['result'][i]['sid']] = json['result'][i];
+                    json['result'][i]['note'].length ? infos[json['result'][i]['note']['0']['i_sid']] = json['result'][i]['note'] : '';  //判断该成员下有没有备注并且添加到数组
+                    if (json['result'][i]['note'].length) {
+                        note_html = '<div mdui-dialog="{target: \'#note_info\'}"  class="mdui-chip">\n' +
+                            '  <span class="mdui-chip-icon">' + json['result'][i]['note'].length + '</span>\n' +
+                            '  <span class="mdui-chip-title">条备注信息</span>\n' +
+                            '</div>';
+                    } else {
+                        note_html = '';
+                    }
+
+                    var html = '<tr>\n' +
+                        '                <td nowrap>' + (i + 1) + '</td>\n' +
+                        '                <td nowrap>' + json['result'][i]['name'] + '</td>\n' +
+                        '                <td nowrap class="student_id">' + json['result'][i]['sid'] + '</td>\n' +
+                        '                <td nowrap class="note" >' + note_html + '</td>\n' +
+                        '                <td nowrap class="but_group">\n' +
+                        '                    <div>\n' +
+                        '                        <button type="button" class="mdui-btn mdui-btn-raised btn_note" mdui-dialog="{target: \'#exampleDialog\',modal:true}">备注</button>\n' +
+                        '                        <button type="button" class="mdui-btn mdui-btn-raised student_info" mdui-dialog="{target: \'#example-4\',modal:true}">查看信息</button>\n' +
+                        '                    </div>\n' +
+                        '                </td>\n' +
+                        '            </tr>'
+                    $('.info_body').append(html);
+                });
+                $('.mdui-progress').addClass('mdui-hidden');
+                $('.but_group').removeClass('mdui-hidden');
+
+            }else {
+                $('.mdui-table-fluid').addClass('mdui-hidden');
+                mdui.snackbar({
+                    message: json['result']
+                });
+                $('.mdui-progress').addClass('mdui-hidden');
+            }
+        })
+    }
+
+    window.onload = function () {
+        init();
+    }
+
+    //查看有效备注
+    $(".info_body").on("click", ".note", function () {
+        var sid = $(this).prev().text();  //取当前成员学号
+        var name = $(this).prev().prev().html(); //取当前成员姓名
+        $('.student_note_name').text(name);
+        $('.student_note_id').text(sid);
+        if (infos[sid]) {
+            $('.active_infos').html('');  //初始化信息框
+            for (var i = 0; i < infos[sid].length; i++) {
+                var end_time = new Date(infos[sid][i]['end_time'] * 1000)
+                var html = ' <div class=' + infos[sid][i]['v_order_number'] + '>\n' +
+                    '                <p>编号：<span>' + infos[sid][i]['v_order_number'] + '</span></p>\n' +
+                    '                <p>备注信息：' + infos[sid][i]['v_note_info'] + '</p>\n' +
+                    '                <p>有效时间至：' + end_time.toLocaleDateString().replace(/\//g, "-") + " " + end_time.toTimeString().substr(0, 8) + '</p>\n' +
+                    '                <button class="mdui-btn mdui-btn-raised note_delete mdui-ripple mdui-color-theme-accent">删除</button>\n' +
+                    '                <div class="mdui-divider mdui-m-t-3"></div>\n' +
+                    '            </div>';
+                $('.active_infos').append(html);
+            }
+        }
+    });
+
+    //个人信息
+     $('.info_body').on('click', '.student_info', function () {
+        var sid = $(this).parent().parent().prev().prev().text();  //取当前成员学号
+        var name =jsonData[sid]['name']  //姓名
+        var phone =jsonData[sid]['phone_number'];  //手机号
+        var parent_phone =jsonData[sid]['parent_phone'];  //家长手机号
+        var address =jsonData[sid]['home_address']; //家庭地址
+        var html = '<div>\n' +
+            '                <div>\n' +
+            '                    <div class="mdui-card-header">\n' +
+            '                        <div class="mdui-center mdui-valign mdui-card-header-avatar"><i class="mdui-icon material-icons">person_outline</i></div>\n' +
+            '                        <div class="mdui-card-header-title">'+name+'</div>\n' +
+            '                        <div class="mdui-card-header-subtitle">'+sid+'</div>\n' +
+            '                    </div>\n' +
+            '                    <diiv>\n' +
+            '                        <p>手机号：'+phone+'</p>\n' +
+            '                        <p>家庭地址：'+address+'</p>\n' +
+            '                        <p>家长电话：'+parent_phone+'</p>\n' +
+            '                    </diiv>\n' +
+            '            </div>';
+        $('.a_info').html(html);
+        $('.modify_sid').val(sid);
+        $('.modiyf_name').val(name);
+        $('.modify_number').val(phone);
+        $('.modify_address').val(address);
+        $('.modify_p_number').val(parent_phone);
+    })
+
+    //删除备注
+    $(".active_infos").on('click','.note_delete',function () {
+        var  sid = $('.student_note_id').text(); //学号
+        var order = $(this).prev().prev().prev().children().text(); //备注编号
+
+        $.get('/index.php/admin/student/noteDelete?order='+order+'&sid='+sid,function (json) {
+            data = JSON.parse(json);
+            if(data.res){
+                init();
+                $('.'+order).remove(); //删除节点
+               if($(".active_infos").find("div").length ==0){
+                   $(".active_infos").html('<p>暂无备注数据了</p>');
+               };
+                mdui.snackbar({
+                    message: '删除成功'
+                });
+            }else {
+                mdui.snackbar({
+                    message: '删除失败'
+                });
+            }
+        });
+    })
+
+
+    /**
+     * 获取当前按钮对象，用于针对本行备注修改
+     */
+    var note_obj;  //储存备注节点对象
+    $('.info_body').on('click', '.btn_note', function () {   //事件委托才能获取this节点
+        note_obj = $(this).parent().parent().prev();  //取备注节点
+        $('.input_note').val(note_obj.children('.note_info').text());  //自动填入已写好备注信息
+        $('.end_time').val(note_obj.children('label').children('.time').text());  //自动填入已写好备注有效截止时间
+    });
+
+    /*
+    备注信息填入
+     */
+    $('.confirm').click(function () {
+        var note = $('.input_note').val(); //取备注信息
+        var note_time = $('.end_time').val();  //取备注结束时间
+        if (note) {
+            if (note_time) {
+                note_obj.html('<span class="note_info">' + note + '</span><label class="mdui-textfield-label">备注有效截止时间：<sapn class="time">' + note_time + '</sapn></label>')   //修改备注信息
+            } else {
+                mdui.confirm('备注有效截止时间未输入 是否继续 默认有效时间为8天 备注有效期可小于当前时间',
+                    function(){
+                        note_obj.html('<span class="note_info">' + note + '<span>');
+                    },
+                    function(){
+
+                    },{'confirmText': "确实", 'cancelText': '取消'}
+                );
+            }
+        }
+    });
+
+    /**
+     * 备注提交
+     */
+    $('.action').click(function () {
+        mdui.confirm('确定提交吗？', function () {
+            var data = [];
+            for (i = 0; i < $('.note').length; i++) {
+                for (var j = 0; j < 1; j++) {
+                    data.push({
+                        note_info: $('.note').eq(i).children('.note_info').text(),  //备注信息
+                        end_time: $('.note').eq(i).children('label').children('.time').text(),  //备注信息截止有效时间
+                        sid: $('.note').eq(i).prev().text()  //学号
+                    })
+                }
+            }
+            var json_str = JSON.stringify(data);  //数组转json
+            $.post('/index.php/admin/student/inpost', {data: json_str}, function (json) {
+                var data = JSON.parse(json);
+                if (data.result) {
+                    mdui.snackbar({
+                        message: '备注成功'
+                    });
+                    init();
+                } else {
+                    mdui.snackbar({
+                        message: '备注失败'
+                    });
+                }
+            });
+        }, null, {'confirmText': "确实", 'cancelText': '取消'});
+    });
+
+    /**
+     *删除成员
+     */
+    $(".action_delete").click(function () {
+        mdui.prompt('请输入学号',
+            function (value) {
+                if (value != "") {
+                    mdui.confirm('确定删除吗？', function () {
+                        $.get('/index.php/admin/student/studentDelete/sid/' + value, function (json) {
+                            console.log(json);
+                            init(); //初始化方法
+                            if (json.code) {
+                                mdui.snackbar({
+                                    message: json.meg
+                                });
+                            } else {
+                                mdui.snackbar({
+                                    message: json.meg
+                                });
+                            }
+                        },'json');
+                    }, null, {'confirmText': "确实", 'cancelText': '取消'});
+                }
+            }, null
+            , {'confirmText': "确实", 'cancelText': '取消'});
+    });
+
+    /**
+     *弹出下载
+     */
+    function openDownloadDialog(url, saveName) {
+        if(typeof url == 'object' && url instanceof Blob)
+        {
+            url = URL.createObjectURL(url); // 创建blob地址
+        }
+        var aLink = document.createElement('a');
+        aLink.href = url;
+        aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+        var event;
+        if(window.MouseEvent) event = new MouseEvent('click');
+        else
+        {
+            event = document.createEvent('MouseEvents');
+            event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        }
+        aLink.dispatchEvent(event);
+    }
+
+    /**
+     *将数组转换成sheet
+     */
+    function sheet2blob(sheet, sheetName) {
+        sheetName = sheetName || 'sheet1';
+        var workbook = {
+            SheetNames: [sheetName],
+            Sheets: {}
+        };
+        workbook.Sheets[sheetName] = sheet;
+        // 生成excel的配置项
+        var wopts = {
+            bookType: 'xlsx', // 要生成的文件类型
+            bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+            type: 'binary'
+        };
+        var wbout = XLSX.write(workbook, wopts);
+        var blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
+        // 字符串转ArrayBuffer
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+        return blob;
+    }
+
+    //打印开始并且从浏览器导出
+    function print() {
+        if($('.info_body').children().length == 0){
+            mdui.snackbar({
+                message: '请先查询记录'
+            });
+        }else {
+            mdui.prompt('导出文件名',
+                function (value) {
+                    if(value == ""){
+                        return
+                    }
+                    $('.mdui-progress-diy').removeClass('mdui-hidden');  //显示进度条
+                    var tr = $('.info_body').children();
+                    var aoa = [
+                        ['#','姓名', '学号', '班级', '手机号','父母手机号','家庭地址'],
+                    ];
+                    var classname = $('.classname').text();
+                    tr.each(function (i) {
+                        var tdArr = $(this).children(); //td标签
+                        var sid = tdArr.eq(2).text();
+
+                        var name =jsonData[sid]['name']  //姓名
+                        var phone =jsonData[sid]['phone_number'];  //手机号
+                        var parent_phone =jsonData[sid]['parent_phone'];  //家长手机号
+                        var address =jsonData[sid]['home_address']; //家庭地址
+                        aoa.push([(i+1),name,sid,classname,phone,parent_phone,address]);
+                    });
+                    var sheet = XLSX.utils.aoa_to_sheet(aoa);
+                    openDownloadDialog(sheet2blob(sheet), value+'.xlsx');
+                    $('.mdui-progress-diy').addClass('mdui-hidden');
+                }, function (value) {},{confirmText:"确定",cancelText:"取消"}
+            );
+        }
+    }
+
+    //修改学生信息
+    $('.stu_modify_btn').click(function () {
+            $('.stu_info').addClass("mdui-hidden");
+            $('.stu_modify').removeClass('mdui-hidden');
+    });
+
+    //取消修改
+    $('.close').click(function () {
+        $('.stu_info').removeClass("mdui-hidden");
+        $('.stu_modify').addClass('mdui-hidden');
+    })
+
+    //修改学生信息
+    $('.modify_stu_info').click(function () {
+           var sid = $('.modify_sid').val();
+           var name = $('.modiyf_name').val();
+           var number = $('.modify_number').val();
+           var address = $('.modify_address').val();
+           var pNumber = $('.modify_p_number').val();
+           if(sid != "" && name != "" && number != ""&& address != "" && pNumber != ""){
+               $.post('/index.php/admin/student/stuModify',{sid:sid,name:name,number:number,address:address,pNumber:pNumber},function (json) {
+                 //  console.log(json.code);
+                   if(json.code){
+                       init();
+                       mdui.snackbar({
+                           message: json.meg
+                       });
+                       var inst = new mdui.Dialog('#example-4');
+                       inst.close();
+                       $('.stu_info').removeClass("mdui-hidden");
+                       $('.stu_modify').addClass('mdui-hidden');
+                   }else {
+                       mdui.snackbar({
+                           message: json.meg
+                       });
+                   }
+               },'json');
+           }else {
+               mdui.snackbar({
+                   message: '某项输入不能为空'
+               });
+           }
+    });
+
+</script>
+

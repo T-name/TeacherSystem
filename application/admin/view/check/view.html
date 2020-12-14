@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>查询签到</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/static/js/xlsx.core.min.js"></script>
+    <!--    <script type="text/javascript" src="/static/js/xlsx.full.min.js"></script>-->
+
+
+    <style>
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+        .fow{
+            overflow:visible;!important;
+        }
+    </style>
+</head>
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-red mdui-appbar-with-toolbar">
+
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer', swipe: true}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <a class="mdui-typo-title" style="margin-left: -10px">签到记录</a>
+        <div class="mdui-toolbar-spacer"></div>
+        <button class="mdui-btn" mdui-menu="{target: '#example-attr'}">更多</button>
+        <ul class="mdui-menu mdui-menu-cascade"  id="example-attr">
+            <li class="mdui-menu-item">
+                <a href="javascript:;" class="mdui-ripple"  onclick=print()>
+                    下载打印
+                </a>
+            </li>
+            <li class="mdui-menu-item">
+                <a href="javascript:;"  mdui-dialog="{target: '#exampleDialog',modal:true}" class="mdui-ripple">
+                    修改记录
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="mdui-progress-diy mdui-progress mdui-hidden">
+        <div class="mdui-progress-indeterminate"></div>
+    </div>
+</header>
+
+<div class="mdui-drawer mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list" mdui-collapse="{accordion: true}"  style="margin-bottom: 76px;">
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-list-item mdui-ripple" onclick="window.open('http://'+window.location.host+'/index.php/admin/admin/home','_self')">
+                <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+                <div class="mdui-list-item-content">首页</div>
+            </li>
+
+            <a href="/index.php/admin/view/classview">
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">dashboard</i>
+                    <div class="mdui-list-item-content">班级管理</div>
+                </li>
+            </a>
+
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">people</i>
+                    <div class="mdui-list-item-content">导入信息</div>
+                    <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                </div>
+                <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    <a href="/index.php/admin/Input/index#example6-tab1">
+                        <li class="mdui-list-item mdui-ripple">单个导入</li>
+                    </a>
+                    <a href="/index.php/admin/Input/index#example6-tab2">
+                        <li class="mdui-list-item mdui-ripple">批量导入</li>
+                    </a>
+                </ul>
+            </li>
+
+        </ul>
+        <li class="mdui-divider"></li>
+        <li class="mdui-list-item mdui-ripple" mdui-dialog="{target: '#info'}">
+            <i class="mdui-list-item-icon mdui-icon material-icons">info</i>
+            <div class="mdui-list-item-content">关于</div>
+        </li>
+    </ul>
+</div>
+
+<div class="mdui-dialog" id="info">
+    <div class="mdui-dialog-title">关于</div>
+    <div class="mdui-dialog-content">Author:小嵩</div>
+    <div class="mdui-m-l-2 mdui-typo mdui-text-color-theme-disabled">
+        <p>{$version|default="2.2"}</p>
+    </div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+    </div>
+</div>
+
+<div class="mdui-container mdui-m-y-5" style="max-width: 840px">
+    <!-- CONTENT -->
+    <div>
+<!--       老布局-->
+        <!--    <div id="mypanel" class=" mdui-panel mdui-panel-popout" mdui-panel>-->
+        <!--        <div class="mdui-panel-item mdui-panel-item-open">-->
+        <!--            <div class="mdui-progress-diy mdui-progress mdui-hidden">-->
+        <!--                <div class="mdui-progress-indeterminate"></div>-->
+        <!--            </div>-->
+        <!--            <div class="mdui-panel-item-header">-->
+        <!--                <div class="mdui-panel-item-title">自定义查询</div>-->
+        <!--                <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>-->
+        <!--            </div>-->
+        <!--            <div class="mdui-panel-item-body fow">-->
+        <!--                &lt;!&ndash;                自定义查询&ndash;&gt;-->
+        <!--                <div class="mdui-m-b-2">-->
+        <!--                    <div class="mdui-table-fluid table-diy mdui-hidden">-->
+        <!--                        <table class="mdui-table mdui-table-hoverable">-->
+        <!--                            <thead>-->
+        <!--                            <tr>-->
+        <!--                                <th>#</th>-->
+        <!--                                <th>姓名</th>-->
+        <!--                                <th>学号</th>-->
+        <!--                                <th>班级</th>-->
+        <!--                                <th>状态</th>-->
+        <!--                                <th>签到时间</th>-->
+        <!--                                <th>修改时间</th>-->
+        <!--                            </tr>-->
+        <!--                            </thead>-->
+        <!--                            <tbody class="diytable">-->
+
+        <!--                            </tbody>-->
+        <!--                        </table>-->
+        <!--                    </div>-->
+        <!--                    &lt;!&ndash;                        翻页按钮&ndash;&gt;-->
+        <!--                    <div class="mdui-text-center pages_module mdui-m-y-3 mdui-hidden">-->
+        <!--                        <button  disabled class="left mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-blue mdui-ripple"><i class="mdui-icon material-icons">&#xe408;</i></button>-->
+        <!--                        <span class="pages">1/10</span>-->
+        <!--                        <button class="right mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-blue mdui-ripple"><i class="mdui-icon material-icons">&#xe409;</i></button>-->
+        <!--                    </div>-->
+        <!--                    <div class="mdui-row mdui-row-gapless">-->
+        <!--                        <div class="mdui-textfield mdui-col-xs-6">-->
+        <!--                            <label class="mdui-textfield-label">开始时间</label>-->
+        <!--                            <input type="datetime-local" class="start mdui-textfield-input"  placeholder="Text input">-->
+        <!--                        </div>-->
+        <!--                        <div class="mdui-textfield  mdui-col-xs-6">-->
+        <!--                            <label class="mdui-textfield-label">结束时间</label>-->
+        <!--                            <input type="datetime-local" class="end mdui-textfield-input"  placeholder="Text input">-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="mdui-row">-->
+        <!--                        <div class="mdui-col-xs-6">-->
+        <!--                            <label class="mdui-textfield-label">状态</label>-->
+        <!--                            <select class="status mdui-select" mdui-select>-->
+        <!--                                <option value="0">全部</option>-->
+        <!--                                <option value="1">正常</option>-->
+        <!--                                <option value="2">迟到</option>-->
+        <!--                                <option value="3">旷课</option>-->
+        <!--                                <option value="4">早退</option>-->
+        <!--                                <option value="5">请假</option>-->
+        <!--                                <option value="6">其他</option>-->
+        <!--                            </select>-->
+        <!--                        </div>-->
+        <!--                        <div class="mdui-col-xs-6">-->
+        <!--                            <label class="mdui-textfield-label">班级</label>-->
+        <!--                            <select class="class_id mdui-select"  id="select">-->
+        <!--                                <option value="">全部</option>-->
+
+        <!--                                &lt;!&ndash;                       占位&ndash;&gt;-->
+        <!--                            </select>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="mdui-row mdui-row-gapless">-->
+        <!--                        <div class="mdui-textfield mdui-col-xs-6">-->
+        <!--                            <div class="mdui-textfield">-->
+        <!--                                <label class="mdui-textfield-label">学号</label>-->
+        <!--                                <input type="text" oninput="value=value.replace(/[\W]/g,'')" class="student_id mdui-textfield-input"/>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <div class="mdui-textfield  mdui-col-xs-6">-->
+        <!--                            <div class="mdui-textfield">-->
+        <!--                                <label class="mdui-textfield-label">每页条数 默认50条</label>-->
+        <!--                                <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="length mdui-textfield-input"/>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <input  type="button" value="查询" class="find mdui-color-theme-accent mdui-btn-block mdui-btn">-->
+        <!--                    <div class="mdui-btn-group mdui-float-right mdui-m-t-2" >-->
+        <!--                        <button type="button" class="mdui-btn action_modify mdui-hidden" >修改记录</button>-->
+        <!--&lt;!&ndash;                        mdui-dialog="{target: '#exampleDialog',modal:true}"&ndash;&gt;-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+
+    </div>
+    <div class="mdui-card fow">
+        <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title mdui-text-color-black-secondary" >自定义查询</div>
+        </div>
+        <div class="mdui-card-content fow">
+            <div>
+                <!--                自定义查询-->
+                <div class="mdui-m-b-2">
+                    <div class="mdui-table-fluid table-diy mdui-hidden">
+                        <table class="mdui-table mdui-table-hoverable">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>姓名</th>
+                                <th>学号</th>
+                                <th>班级</th>
+                                <th>状态</th>
+                                <th>签到时间</th>
+                                <th>修改时间</th>
+                            </tr>
+                            </thead>
+                            <tbody class="diytable">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--                        翻页按钮-->
+                    <div class="mdui-text-center pages_module mdui-m-y-3 mdui-hidden">
+                        <button  disabled class="left mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">&#xe408;</i></button>
+                        <span class="pages">1/10</span>
+                        <button class="right mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">&#xe409;</i></button>
+                    </div>
+                    <div class="mdui-row mdui-row-gapless">
+                        <div class="mdui-textfield mdui-col-xs-6">
+                            <label class="mdui-textfield-label">开始时间</label>
+                            <input type="datetime-local" class="start mdui-textfield-input"  placeholder="Text input">
+                        </div>
+                        <div class="mdui-textfield  mdui-col-xs-6">
+                            <label class="mdui-textfield-label">结束时间</label>
+                            <input type="datetime-local" class="end mdui-textfield-input"  placeholder="Text input">
+                        </div>
+                    </div>
+                    <div class="mdui-row">
+                        <div class="mdui-col-xs-6">
+                            <label class="mdui-textfield-label">状态</label>
+                            <select class="status mdui-select" mdui-select>
+                                <option value="0">全部</option>
+                                <option value="1">正常</option>
+                                <option value="2">迟到</option>
+                                <option value="3">旷课</option>
+                                <option value="4">早退</option>
+                                <option value="5">请假</option>
+                                <option value="6">其他</option>
+                            </select>
+                        </div>
+                        <div class="mdui-col-xs-6">
+                            <label class="mdui-textfield-label">班级</label>
+                            <select class="class_id mdui-select"  id="select">
+                                <option value="">全部</option>
+
+                                <!--                       占位-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mdui-row mdui-row-gapless">
+                        <div class="mdui-textfield mdui-col-xs-6">
+                            <div class="mdui-textfield">
+                                <label class="mdui-textfield-label">学号</label>
+                                <input type="text" oninput="value=value.replace(/[\W]/g,'')" class="student_id mdui-textfield-input"/>
+                            </div>
+                        </div>
+                        <div class="mdui-textfield  mdui-col-xs-6">
+                            <div class="mdui-textfield">
+                                <label class="mdui-textfield-label">每页条数 默认50条</label>
+                                <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" class="length mdui-textfield-input"/>
+                            </div>
+                        </div>
+                    </div>
+                    <input  type="button" value="查询" class="find mdui-color-theme-accent mdui-btn-block mdui-btn">
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    修改记录框-->
+    <div class="mdui-dialog" id="exampleDialog">
+        <div class="mdui-progress-diy mdui-progress mdui-hidden">
+            <div class="mdui-progress-indeterminate"></div>
+        </div>
+        <div class="mdui-dialog-title">修改记录</div>
+        <div class="mdui-dialog-content">
+            <div class="select">
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">学号</label>
+                    <input class="mdui-textfield-input modify_sid" oninput="value=value.replace(/[\W]/g,'')"  type="text"/>
+                    <div class="mdui-row">
+                        <div class="mdui-textfield mdui-col-xs-6">
+                            <label class="mdui-textfield-label">开始时间</label>
+                            <input type="datetime-local" class="modify_start mdui-textfield-input"  placeholder="Text input">
+                        </div>
+                        <div class="mdui-textfield  mdui-col-xs-6">
+                            <label class="mdui-textfield-label">结束时间</label>
+                            <input type="datetime-local" class="modify_end mdui-textfield-input"  placeholder="Text input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            展示查询结果-->
+            <div>
+                <ul class="mdui-list modify_view">
+
+                </ul>
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple action_modify">修改</button>
+            <button class="mdui-btn mdui-ripple inquire">查询</button>
+            <button class="mdui-btn mdui-ripple close" mdui-dialog-close>取消</button>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+</div>
+</body>
+</html>
+
+<script>
+    /**
+     *  获取当前账号带领的班级 循环到下拉列表提供选择用
+     */
+    $.getJSON('/index.php/admin/check/class',function (json) {
+        $.each(json,function (i) {
+            $('.class_id').append('<option value="'+ json[i].classid+'">'+ json[i].classname+'</option>');
+        });
+        var inst = new mdui.Select('#select');
+
+    })
+
+    /**
+     * diy查询操作
+     */
+    function action(page =1) {
+        $('.mdui-progress-diy').removeClass('mdui-hidden');  //显示进度条
+        length = $('.length').val()?$('.length').val():50;
+        var start_time = $('.start').val() //开始时间
+        var end_time = $('.end').val() //结束时间
+        var class_id = $('.class_id').val() //班级
+        var student_id = $('.student_id').val() //学号
+        var status = $('.status').val() //学号
+
+        data= {start_time:start_time,end_time:end_time,class_id:class_id,student_id:student_id,status:status,page:page,length:length};//准备提交数据-->
+
+        $('.mdui-progress-diy').removeClass('mdui-hidden');  //显示进度条
+        $.post('/index.php/admin/check/diy',data,function (json) {
+         //   console.log(json)
+            $('.table-diy').removeClass('mdui-hidden');  //初始化显示面板
+            $('.diytable').text("");  //初始化表格内容
+            var data= JSON.parse(json);
+            if(data.tips){
+                mdui.snackbar({
+                    message: data.tips
+                });
+                $('.pages_module').addClass('mdui-hidden');
+                $('.mdui-progress').addClass('mdui-hidden');
+                $('.table-diy').addClass('mdui-hidden');
+            }else {
+                $.each(data[0],function (i) {
+                    var html = '<tr class="tr">\n' +
+                        '                                <td>'+(i+1)+'</td>\n' +
+                        '                                <td><nobr>'+data[0][i].name+'</nobr></td>\n' +
+                        '                                <td><nobr>'+data[0][i].sid+'</nobr></td>\n' +
+                        '                                <td><nobr>'+data[0][i].class+'</nobr></td>\n' +
+                        '                                <td><nobr>'+data[0][i].status+'</nobr></td>\n' +
+                        '                                <td><nobr>'+data[0][i].create_time+'</nobr></td>\n' +
+                        '                                <td><nobr>'+data[0][i].update_time+'</nobr></td>\n' +
+                        '                            </tr>';
+                    $('.diytable').append(html);
+                });
+                $('.mdui-progress-diy').addClass('mdui-hidden');
+                $('.pages').text(page+'/'+(Math.ceil(data.lenght/length)));
+                page_max =Math.ceil(data.lenght/length);
+                $('.mdui-progress-diy').addClass('mdui-hidden');
+                $('.pages_module').removeClass('mdui-hidden');
+            }
+
+        });
+    };
+
+    var page =1;
+    /**
+     * 开始查询
+     */
+    $('.find').click(function () {
+        page =1;
+        action();
+    });
+
+    /**
+     * 上一页
+     */
+    $('.left').click(function () {
+        if(page > 1 ){
+            page=page-1;
+            action(page);
+        }else {
+            mdui.snackbar({
+                message: '已到第一页'
+            });
+        }
+    });
+
+    /**
+     * 下一页
+     */
+    $('.right').click(function () {
+        if(page < page_max){
+            page=page+1;
+            action(page);
+            $('.left').removeAttr("disabled");
+        }else {
+            mdui.snackbar({
+                message: '已经到最后一页'
+            });
+        }
+    });
+
+    /**
+     *弹出下载
+     */
+    function openDownloadDialog(url, saveName) {
+        if(typeof url == 'object' && url instanceof Blob)
+        {
+            url = URL.createObjectURL(url); // 创建blob地址
+        }
+        var aLink = document.createElement('a');
+        aLink.href = url;
+        aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+        var event;
+        if(window.MouseEvent) event = new MouseEvent('click');
+        else
+        {
+            event = document.createEvent('MouseEvents');
+            event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        }
+        aLink.dispatchEvent(event);
+    }
+
+    /**
+     *将数组转换成sheet
+     */
+    function sheet2blob(sheet, sheetName) {
+        sheetName = sheetName || 'sheet1';
+        var workbook = {
+            SheetNames: [sheetName],
+            Sheets: {}
+        };
+        workbook.Sheets[sheetName] = sheet;
+        // 生成excel的配置项
+        var wopts = {
+            bookType: 'xlsx', // 要生成的文件类型
+            bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+            type: 'binary'
+        };
+        var wbout = XLSX.write(workbook, wopts);
+        var blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
+        // 字符串转ArrayBuffer
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+        return blob;
+    }
+
+    //打印函数
+    function print() {
+        if($('.diytable').children().length == 0){
+            mdui.snackbar({
+                message: '请先查询记录'
+            });
+        }else {
+            mdui.prompt('导出文件名',
+                function (value) {
+                    if(value == ""){
+                        return
+                    }
+                    $('.mdui-progress-diy').removeClass('mdui-hidden');  //显示进度条
+                    var tr = $('.diytable').children();
+                    var aoa = [
+                        ['#','姓名', '学号', '班级', '状态','签到时间','修改时间'],
+                    ];
+                    tr.each(function (i) {
+                        var tdArr = $(this).children();
+                        var number = tdArr.eq(0).text();
+                        var name = tdArr.eq(1).text();
+                        var sid = tdArr.eq(2).text();
+                        var classname = tdArr.eq(3).text();
+                        var status = tdArr.eq(4).text();
+                        var create = tdArr.eq(5).text();
+                        var update = tdArr.eq(6).text();
+                        aoa.push([number,name,sid,classname,status,create,update]);
+                    });
+                    var sheet = XLSX.utils.aoa_to_sheet(aoa);
+                    openDownloadDialog(sheet2blob(sheet), value+'.xlsx');
+                    $('.mdui-progress-diy').addClass('mdui-hidden');
+                }, function (value) {},{confirmText:"确定",cancelText:"取消"}
+            );
+        }
+    }
+
+    //开始查询函数
+    $('.inquire').click(function () {
+        var sid = $('.modify_sid').val();  //修改学号
+        var modify_start = $('.modify_start').val();  //开始时间
+        var modify_end = $('.modify_end').val();  //结束时间
+        if(sid != "" && modify_start != "" && modify_end != ""){
+            if(new Date(modify_start).getTime() < new Date(modify_end).getTime()){
+                $.post('/index.php/admin/check/modify',{'sid':sid,'start':modify_start,"end": modify_end},function (json) {
+                 //   console.log(json);
+                    $('.modify_view').html("");
+                    if(json.code){
+                        json['res'].forEach(function (value) {
+                           $('.modify_view').append(`<li class="mdui-list-item mdui-p-a-0 modify_list fow">
+                        <div class="mdui-list-item-content">
+                            <div class="mdui-list-item-title mdui-list-item-one-line status">${value.status}</div>
+                            <div class="mdui-list-item-text time">${value.create_time}</div>
+                            <div class="mdui-hidden">
+                            <div class="tid">${value.tid}</div>
+                            <div class="sid">${value.sid}</div>
+                            <div class="id">${value.id}</div>
+                            </div>
+                        </div>
+                        <select class="mdui-select select_status" mdui-select>
+                            <option value="1">正常</option>
+                            <option value="2">迟到</option>
+                            <option value="3">旷课</option>
+                            <option value="4">早退</option>
+                            <option value="5">请假</option>
+                            <option value="6">其他</option>
+                        </select>
+                        </li>`);
+                        $('.select_status:last>option:contains('+value.status+')').attr('selected',true); //默认选择用户状态 关键操作
+                        })
+                        mdui.mutation();
+                        mdui.snackbar({
+                            message: '查询成功'
+                        });
+                    }else {
+                        mdui.snackbar({
+                            message: json.meg
+                        });
+                    }
+                },'json');
+            }else {
+                mdui.snackbar({
+                    message: '开始时间不能大于结束时间'
+                });
+            }
+        }else {
+            mdui.snackbar({
+                message: '参数不能为空'
+            });
+        }
+    });
+
+    var data =[];
+    //开始修改
+    $('.action_modify').click(function () {
+            if($('.modify_view').children().length > 0){
+                data = [];
+                $.each($('.modify_list'),function (i,n) {
+                    let this_stauts = $(n).find('.status').text() //当前状态
+                    let status = $(n).find('.select_status option:selected').text()//修改后状态
+                    if(!(this_stauts == status)){
+                        let time = $(n).find('.time').text() //时间
+                        let tid = $(n).find('.tid').text() //签到ID
+                        let sid = $(n).find('.sid').text() //学号
+                        let id = $(n).find('.id').text() //id
+                        let status_val = $(n).find('.select_status option:selected').val();  //修改后状态
+                        data.push({'id':id,"sid":sid,"tid":tid,'time':time,'status':status_val});
+                    }
+                });
+                //数据提交
+                if(data.length){
+                 //console.log(data);
+                    $.post('/index.php/admin/check/actionModify',{'data':JSON.stringify(data)},function (json) {
+                       // console.log(json);
+                        if(json.code){
+                            close();
+                            mdui.snackbar({
+                                message: '修改成功'
+                            });
+                        }else {
+                            mdui.snackbar({
+                                message: json.meg
+                            });
+                        }
+                    },'json');
+                }else {
+                    mdui.snackbar({
+                        message: '状态未修改'
+                    });
+                }
+            }else {
+                mdui.snackbar({
+                    message: '请先查询'
+                });
+            }
+
+    });
+
+   //销毁修改框
+    function close(){
+        var inst = new mdui.Dialog('#exampleDialog');
+        data = [];
+        $('.modify_view').html("");
+        inst.close();
+    }
+    $('.close').click(function () {
+        close();
+    });
+</script>
+
+
+
+
+

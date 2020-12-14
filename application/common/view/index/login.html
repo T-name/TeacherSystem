@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>T-name-首页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <script src="/static/js/md5.js"></script>
+    <style>
+        .mc-register,
+        .mc-login,
+        .mc-reset {
+            max-width: 448px;
+            overflow-y: auto;
+        }
+        .mc-register .back,
+        .mc-login .back,
+        .mc-reset .back,
+        .mc-register .close,
+        .mc-login .close,
+        .mc-reset .close {
+            display: block;
+            position: absolute;
+            left: 4px;
+            top: 4px;
+        }
+        .mc-register .avatar,
+        .mc-login .avatar,
+        .mc-reset .avatar {
+            display: block;
+            position: absolute;
+            left: 36px;
+            top: 40px;
+            color: rgba(255, 255, 255, 0.56);
+            font-size: 76px;
+        }
+        .mc-register .mdui-dialog-title,
+        .mc-login .mdui-dialog-title,
+        .mc-reset .mdui-dialog-title {
+            padding: 146px 40px 28px 40px;
+        }
+        .mc-register form,
+        .mc-login form,
+        .mc-reset form {
+            padding: 0 40px 62px 40px;
+        }
+        .mc-register .more-option,
+        .mc-login .more-option,
+        .mc-reset .more-option {
+            margin-left: -16px;
+        }
+        .mc-register .captcha-field,
+        .mc-login .captcha-field,
+        .mc-reset .captcha-field {
+            margin-right: 116px;
+            overflow: visible;
+        }
+        .mc-register .captcha-image,
+        .mc-login .captcha-image,
+        .mc-reset .captcha-image {
+            position: absolute;
+            right: -116px;
+            bottom: 29px;
+            cursor: pointer;
+        }
+        .mc-register .send-email-field,
+        .mc-login .send-email-field,
+        .mc-reset .send-email-field {
+            margin-right: 116px;
+            overflow: visible;
+        }
+        .mc-register .send-email,
+        .mc-login .send-email,
+        .mc-reset .send-email {
+            position: absolute;
+            right: -116px;
+            bottom: 29px;
+        }
+
+        @media (max-width: 599px) {
+            .mc-register,
+            .mc-login,
+            .mc-reset {
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                height: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                max-width: none !important;
+                max-height: none !important;
+                border-radius: 0 !important;
+            }
+            .mc-register .back,
+            .mc-login .back,
+            .mc-reset .back,
+            .mc-register .close,
+            .mc-login .close,
+            .mc-reset .close {
+                left: 8px;
+                top: 10px;
+            }
+            .mc-register .avatar,
+            .mc-login .avatar,
+            .mc-reset .avatar {
+                display: none;
+            }
+            .mc-register .mdui-dialog-title,
+            .mc-login .mdui-dialog-title,
+            .mc-reset .mdui-dialog-title {
+                line-height: 36px;
+                padding: 10px 16px 10px 52px;
+            }
+            .mc-register form,
+            .mc-login form,
+            .mc-reset form {
+                padding: 0 24px 24px 24px;
+            }
+            .mc-register form .mdui-textfield,
+            .mc-login form .mdui-textfield,
+            .mc-reset form .mdui-textfield {
+                padding-top: 4px;
+            }
+            .mc-register .actions,
+            .mc-login .actions,
+            .mc-reset .actions {
+                margin-top: 14px;
+            }
+        }
+        .mc-register,
+        .mc-login,
+        .mc-reset {
+            max-width: 448px;
+            overflow-y: auto;
+        }
+        .mc-register .back,
+        .mc-login .back,
+        .mc-reset .back,
+        .mc-register .close,
+        .mc-login .close,
+        .mc-reset .close {
+            display: block;
+            position: absolute;
+            left: 4px;
+            top: 4px;
+        }
+        .mc-register .avatar,
+        .mc-login .avatar,
+        .mc-reset .avatar {
+            display: block;
+            position: absolute;
+            left: 36px;
+            top: 40px;
+            color: rgba(255, 255, 255, 0.56);
+            font-size: 76px;
+        }
+        .mc-register .mdui-dialog-title,
+        .mc-login .mdui-dialog-title,
+        .mc-reset .mdui-dialog-title {
+            padding: 146px 40px 28px 40px;
+
+        }
+        .mc-register form,
+        .mc-login form,
+        .mc-reset form {
+            padding: 0 40px 62px 40px;
+        }
+        .mc-register .more-option,
+        .mc-login .more-option,
+        .mc-reset .more-option {
+            margin-left: -16px;
+        }
+        .mc-register .captcha-field,
+        .mc-login .captcha-field,
+        .mc-reset .captcha-field {
+            margin-right: 116px;
+            overflow: visible;
+        }
+        .mc-register .captcha-image,
+        .mc-login .captcha-image,
+        .mc-reset .captcha-image {
+            position: absolute;
+            right: -116px;
+            bottom: 29px;
+            cursor: pointer;
+        }
+        .mc-register .send-email-field,
+        .mc-login .send-email-field,
+        .mc-reset .send-email-field {
+            margin-right: 116px;
+            overflow: visible;
+        }
+        .mc-register .send-email,
+        .mc-login .send-email,
+        .mc-reset .send-email {
+            position: absolute;
+            right: -116px;
+            bottom: 29px;
+        }
+
+        @media (max-width: 599px) {
+            .mc-register,
+            .mc-login,
+            .mc-reset {
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                height: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                max-width: none !important;
+                max-height: none !important;
+                border-radius: 0 !important;
+            }
+            .mc-register .back,
+            .mc-login .back,
+            .mc-reset .back,
+            .mc-register .close,
+            .mc-login .close,
+            .mc-reset .close {
+                left: 8px;
+                top: 10px;
+            }
+            .mc-register .avatar,
+            .mc-login .avatar,
+            .mc-reset .avatar {
+                display: none;
+            }
+            .mc-register .mdui-dialog-title,
+            .mc-login .mdui-dialog-title,
+            .mc-reset .mdui-dialog-title {
+                line-height: 36px;
+                padding: 10px 16px 10px 52px;
+            }
+            .mc-register form,
+            .mc-login form,
+            .mc-reset form {
+                padding: 0 24px 24px 24px;
+            }
+            .mc-register form .mdui-textfield,
+            .mc-login form .mdui-textfield,
+            .mc-reset form .mdui-textfield {
+                padding-top: 4px;
+            }
+            .mc-register .actions,
+            .mc-login .actions,
+            .mc-reset .actions {
+                margin-top: 14px;
+            }
+        }
+        .mc-register,
+        .mc-login,
+        .mc-reset {
+            max-width: 448px;
+            overflow-y: auto;
+        }
+        .mc-register .back,
+        .mc-login .back,
+        .mc-reset .back,
+        .mc-register .close,
+        .mc-login .close,
+        .mc-reset .close {
+            display: block;
+            position: absolute;
+            left: 4px;
+            top: 4px;
+        }
+        .mc-register .avatar,
+        .mc-login .avatar,
+        .mc-reset .avatar {
+            display: block;
+            position: absolute;
+            left: 36px;
+            top: 40px;
+            color: rgba(255, 255, 255, 0.56);
+            font-size: 76px;
+        }
+        .mc-register .mdui-dialog-title,
+        .mc-login .mdui-dialog-title,
+        .mc-reset .mdui-dialog-title {
+            padding: 146px 40px 28px 40px;
+
+        }
+        .mc-register form,
+        .mc-login form,
+        .mc-reset form {
+            padding: 0 40px 62px 40px;
+        }
+        .mc-register .more-option,
+        .mc-login .more-option,
+        .mc-reset .more-option {
+            margin-left: -16px;
+        }
+        .mc-register .captcha-field,
+        .mc-login .captcha-field,
+        .mc-reset .captcha-field {
+            margin-right: 116px;
+            overflow: visible;
+        }
+        .mc-register .captcha-image,
+        .mc-login .captcha-image,
+        .mc-reset .captcha-image {
+            position: absolute;
+            right: -116px;
+            bottom: 29px;
+            cursor: pointer;
+        }
+        .mc-register .send-email-field,
+        .mc-login .send-email-field,
+        .mc-reset .send-email-field {
+            margin-right: 116px;
+            overflow: visible;
+        }
+        .mc-register .send-email,
+        .mc-login .send-email,
+        .mc-reset .send-email {
+            position: absolute;
+            right: -116px;
+            bottom: 29px;
+        }
+
+
+        @media (max-width: 599px) {
+            .mc-register,
+            .mc-login,
+            .mc-reset {
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                height: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                max-width: none !important;
+                max-height: none !important;
+                border-radius: 0 !important;
+            }
+            .mc-register .back,
+            .mc-login .back,
+            .mc-reset .back,
+            .mc-register .close,
+            .mc-login .close,
+            .mc-reset .close {
+                left: 8px;
+                top: 10px;
+            }
+            .mc-register .avatar,
+            .mc-login .avatar,
+            .mc-reset .avatar {
+                display: none;
+            }
+            .mc-register .mdui-dialog-title,
+            .mc-login .mdui-dialog-title,
+            .mc-reset .mdui-dialog-title {
+                line-height: 36px;
+                padding: 10px 16px 10px 52px;
+            }
+            .mc-register form,
+            .mc-login form,
+            .mc-reset form {
+                padding: 0 24px 24px 24px;
+            }
+            .mc-register form .mdui-textfield,
+            .mc-login form .mdui-textfield,
+            .mc-reset form .mdui-textfield {
+                padding-top: 4px;
+            }
+            .mc-register .actions,
+            .mc-login .actions,
+            .mc-reset .actions {
+                margin-top: 14px;
+            }
+        }
+
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+        strong{
+            color: #1a73e8;
+            font-weight: 400;
+        }
+        #page-index{
+            font-family: Roboto,Noto,Helvetica,Arial,sans-serif;
+            font-size: 14.5px;
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 1100px;
+            padding: 8px 0 62px;
+            width: 96%;
+            padding-top: 16px;
+            padding-right: 16px;
+            padding-left: 16px;
+            color: #3c5675;
+            line-height: 1.6;
+        }
+        #page-index .banner {
+            padding-top: 40px;
+            padding-bottom: 64px;
+            text-align: center;
+        }
+        #page-index .feature {
+            padding: 48px 0 56px;
+        }
+        #page-index .feature .icon{
+            font-family: Roboto,Noto,Helvetica,Arial,sans-serif;
+            font-size: 14.5px;
+            color: #3c5675;
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+            display: block;
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+        }
+
+    </style>
+</head>
+<body class="mdui-theme-primary-indigo mdui-theme-accent-blue mdui-appbar-with-toolbar">
+
+<header class="mdui-appbar mdui-appbar-fixed mdui-shadow-0 ">
+    <div class="mdui-toolbar mdui-color-white">
+        <i class="mdui-icon material-icons">home</i>
+        <a class="mdui-typo-title" style="margin-left: -10px">首页</a>
+        <div class="mdui-toolbar-spacer"></div>
+        <div class="head">
+            <button  mdui-dialog="{target: '#exampleDialog',modal:true}" class=" mdui-hidden login  mdui-ripple mdui-btn ">登录</button>
+            <!--            头像占位-->
+        </div>
+    </div>
+</header>
+<div>
+    <!--    登入框-->
+    <div id="exampleDialog"  class="mdui-dialog mc-login "  style=" top: 0px;  height: 537px;">
+        <button mdui-dialog-close class="mdui-btn mdui-btn-icon mdui-text-color-white close">
+            <i class="mdui-icon material-icons">close</i>
+        </button>
+        <div class="mdui-dialog-title mdui-color-indigo" >登录</div>
+        <div class="mdui-progress mdui-hidden">
+            <div class="mdui-progress-indeterminate"></div>
+        </div>
+        <form method="post" action="index.php/index/index/login">
+            <div class="mdui-m-t-2 mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom mdui-textfield-invalid-html5">
+                <label class="mdui-textfield-label">用户名或邮箱</label>
+
+                <input class="user mdui-textfield-input" name="user" type="text" required="">
+
+                <div class="mdui-textfield-error">账号不能为空</div>
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
+                <label class="mdui-textfield-label">密码</label>
+                <input class="password mdui-textfield-input" name="password" type="password" required="">
+                <div class="mdui-textfield-error">密码不能为空</div></div><div class="actions mdui-clearfix">
+            <img class="captcha"  src="{:url('/index.php/index/index/verify')}" alt="captcha" />
+            <input  type="text" name="code" class="code mdui-m-t-2 mdui-textfield-input" maxlength='{$codelength|default=4}' onKeyUp="value=value.replace(/[\W]/g,'')"  placeholder="验证码" />
+        </div>
+            <div class="mdui-m-t-3">
+                <button class="mdui-btn mdui-ripple more-option" type="button" mdui-menu="{target: '#mc-login-menu', position: 'top', covered: true}">更多选项</button>
+                <ul class="mdui-menu" id="mc-login-menu">
+                    <li class="mdui-menu-item">
+                        <a class="mdui-ripple mc-password-reset-trigger forget_password">忘记密码</a>
+                    </li><li class="mdui-menu-item">
+                    <a class="mdui-ripple mc-register-trigger reg">创建新账号</a>
+                </li>
+                </ul>
+                <button type="submit" class="btn mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">登录</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mdui-card">
+    <!--巨幕-->
+    <div id="page-index" class="mdui-container">
+        <div class="banner">
+            <span style="font-size: 32px">
+                <strong>T-</strong>name
+                <!--                <strong>D</strong>esign-->
+                <!--                <strong>U</strong>ser-->
+                <!--                <strong>I</strong>nterface-->
+            </span>
+            <div class="mdui-m-t-3" style="font-size: 20px;color: #6b7e96">方便 快捷 高效 它能让你更好的完成工作！</div>
+            <div class="mdui-m-t-5">
+                <a href="https://github.com/T-name/Teachersystem"  class="mdui-btn mdui-ripple">文档</a>
+                <a href="https://t-name.gitee.io/" class="mdui-btn mdui-ripple" target="_blank">我的博客</a></div>
+            <div class="mdui-m-t-3 mdui-typo">
+                <span style="color: #6b7e96">当前版本：v 2.1</span>
+                <span>
+        <a href="https://github.com/T-name/Teachersystem" rel="nofollow" target="_blank">Github</a></span>
+            </div>
+        </div>
+        <div class="feature">
+            <svg class="svg icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M17.066667 1024c-3.413333 0-6.826667 0-6.826667-3.413333-6.826667-3.413333-10.24-13.653333-6.826667-23.893334 174.08-310.613333 341.333333-604.16 723.626667-791.893333 6.826667-3.413333 17.066667 0 23.893333 6.826667 3.413333 6.826667 0 17.066667-6.826666 23.893333C368.64 419.84 211.626667 696.32 30.72 1013.76c-3.413333 6.826667-6.826667 10.24-13.653333 10.24z"></path><path d="M300.373333 750.933333c-51.2 0-88.746667-23.893333-105.813333-64.853333-85.333333-191.146667 92.16-382.293333 102.4-389.12 3.413333-3.413333 10.24-6.826667 13.653333-3.413333 6.826667 0 10.24 3.413333 13.653334 6.826666l27.306666 47.786667c6.826667-37.546667 20.48-85.333333 37.546667-105.813333 27.306667-30.72 167.253333-109.226667 184.32-119.466667 6.826667-3.413333 13.653333-3.413333 20.48 3.413333l34.133333 34.133334 20.48-64.853334 10.24-10.24c10.24-3.413333 218.453333-78.506667 344.746667-85.333333 6.826667 0 10.24 3.413333 13.653333 6.826667 3.413333 3.413333 3.413333 10.24 0 17.066666l-170.666666 341.333334c-3.413333 3.413333-6.826667 6.826667-13.653334 10.24l-167.253333 23.893333 85.333333 27.306667c3.413333 0 6.826667 3.413333 10.24 10.24s3.413333 10.24 0 13.653333c-23.893333 68.266667-293.546667 293.546667-457.386666 300.373333h-3.413334z m3.413334-416.426666c-40.96 47.786667-143.36 194.56-78.506667 334.506666C238.933333 703.146667 266.24 716.8 307.2 716.8c139.946667-6.826667 368.64-194.56 419.84-262.826667l-136.533333-44.373333c-6.826667-3.413333-13.653333-10.24-10.24-17.066667s6.826667-13.653333 13.653333-13.653333l228.693333-34.133333 153.6-307.2c-112.64 13.653333-266.24 68.266667-300.373333 78.506666L648.533333 194.56c-3.413333 3.413333-6.826667 10.24-13.653333 10.24s-10.24 0-17.066667-3.413333l-40.96-40.96c-58.026667 34.133333-146.773333 85.333333-163.84 105.813333-17.066667 20.48-34.133333 92.16-37.546666 133.12 0 6.826667-6.826667 13.653333-13.653334 13.653333s-13.653333-3.413333-17.066666-6.826666L303.786667 334.506667z"></path></svg>
+            <h2>序言</h2>
+            <div class="mdui-typo">
+               <p>在这里提供了一系列代替纸张的方法，如果你也崇尚环保！</p>
+                <p>当然 不仅如此 你令人头疼的繁琐工作在这里也将变得轻松。。。。。</p>
+            </div>
+        </div>
+        <div class="feature advantage">
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M751.103601 0.001707a17.271438 17.271438 0 0 0-15.63304 9.420784l-74.990808 149.503751-167.935721 23.893293a16.861839 16.861839 0 0 0-9.48905 28.876752l129.877116 116.292073-32.529012 164.18106c-2.389329 13.85811 12.390379 24.405293 25.019692 17.851703L750.932935 432.470319l146.295223 77.584938c12.629312 6.485323 27.306621-4.027727 24.985558-17.817571l-32.153546-164.181059 128.682452-116.326207a16.827705 16.827705 0 0 0-9.489051-28.876751l-167.799187-23.893294-75.093208-149.503751A17.305571 17.305571 0 0 0 751.103601 0.001707zM750.932935 55.126948l63.590294 126.634456c2.491729 5.051725 7.372788 8.533319 12.970645 9.318384l142.267496 20.3093-110.148083 98.645169a16.418106 16.418106 0 0 0-4.949325 14.882108l27.750354 139.263768-123.425928-65.774824a17.510371 17.510371 0 0 0-16.04264 0l-122.538462 65.740691 28.091687-139.263768a16.759439 16.759439 0 0 0-4.949326-14.950375l-111.342747-98.645169 142.199229-20.275166a17.066638 17.066638 0 0 0 12.970645-9.284252zM563.199915 614.400683c-28.057553 0-51.199915 23.142361-51.199915 51.199914v307.199488c0 28.057553 23.142361 51.199915 51.199915 51.199915h307.199488c28.057553 0 51.199915-23.142361 51.199914-51.199915v-307.199488c0-28.057553-23.142361-51.199915-51.199914-51.199914z m0 34.133276h307.199488c9.762117 0 17.066638 7.304521 17.066638 17.066638v307.199488c0 9.762117-7.304521 17.066638-17.066638 17.066639h-307.199488a16.657039 16.657039 0 0 1-17.066639-17.066639v-307.199488c0-9.762117 7.304521-17.066638 17.066639-17.066638zM51.200768 102.401536C23.143215 102.401536 0.000853 125.543897 0.000853 153.601451v307.199488c0 28.057553 23.142361 51.199915 51.199915 51.199914h307.199488c28.057553 0 51.199915-23.142361 51.199915-51.199914v-307.199488c0-28.057553-23.142361-51.199915-51.199915-51.199915z m0 34.133276h307.199488c9.762117 0 17.066638 7.304521 17.066638 17.066639v307.199488c0 9.762117-7.304521 17.066638-17.066638 17.066638h-307.199488a16.657039 16.657039 0 0 1-17.066638-17.066638v-307.199488c0-9.762117 7.304521-17.066638 17.066638-17.066639z m0 477.865871c-28.057553 0-51.199915 23.142361-51.199915 51.199914v307.199488c0 28.057553 23.142361 51.199915 51.199915 51.199915h307.199488c28.057553 0 51.199915-23.142361 51.199915-51.199915v-307.199488c0-28.057553-23.142361-51.199915-51.199915-51.199914z m0 34.133276h307.199488c9.762117 0 17.066638 7.304521 17.066638 17.066638v307.199488c0 9.762117-7.304521 17.066638-17.066638 17.066639h-307.199488a16.657039 16.657039 0 0 1-17.066638-17.066639v-307.199488c0-9.762117 7.304521-17.066638 17.066638-17.066638z"></path>
+            </svg>
+            <h2>特色功能</h2>
+            <div>
+                <div class="mdui-typo">
+                    <div>
+                        <blockquote>
+                            <span class="mdui-typo-title">云端签到表</span>
+                            <p>上课签到表忘记带了？签到表不小心掉了？签到表太多查询起来费神 统计起来更要命？签到表人手一份浪费资源？传统签到表太麻烦了？<br/>一键签到 签到记录云存储 随时随地签到 随时随地查看签到记录 再也不用担心签到表遗失 忘记带了</p>
+                            <footer>课任老师</footer>
+                        </blockquote>
+                    </div>
+                    <div>
+                        <blockquote>
+                            <span  class="mdui-typo-title">云端签到查询</span>
+                            <p>上课这么久了，看一下签到记录？从包里拿出一沓签到表。。。。。。，好不容易找到了，问题又来了该怎么筛选数据 靠手？<br/>签到记录云端存储更方便 更快捷 更简单 一键查询 个性筛选 一键导出excel</p>
+                            <footer>班主任  课任老师</footer>
+                        </blockquote>
+                    </div>
+                    <div>
+                        <blockquote>
+                            <span  class="mdui-typo-title">班级在线管理</span>
+                            <p>班级成员信息很难管理？<br/>一键软删除服役/退学/休学同学 个人信息在线管理 随时随地查看 个人信息修改 单/批量导入</p>
+                            <footer>班主任</footer>
+                        </blockquote>
+                    </div>
+                    <div>
+                        <blockquote>
+                            <span  class="mdui-typo-title">作业发布</span>
+                            <p>课后写一篇观后感，但是上的人数太多，之后不好统计？<br/>发布云端作业 生成URL链接 学生进入提交作业 方便筛选未交同学</p>
+                            <footer>课任老师</footer>
+                        </blockquote>
+                    </div>
+                    <div>
+                        <blockquote>
+                            <p  class="mdui-typo-title">更多功能自行体验。。。</p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="feature">
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M85.333333 34.133333A51.2 51.2 0 0 0 34.133333 85.333333v853.333334A51.2 51.2 0 0 0 85.333333 989.866667h853.333334a51.2 51.2 0 0 0 51.2-51.2V85.333333A51.2 51.2 0 0 0 938.666667 34.133333H85.333333zM85.333333 0h853.333334a85.333333 85.333333 0 0 1 85.333333 85.333333v853.333334a85.333333 85.333333 0 0 1-85.333333 85.333333H85.333333a85.333333 85.333333 0 0 1-85.333333-85.333333V85.333333a85.333333 85.333333 0 0 1 85.333333-85.333333z"></path>
+                <path d="M296.504889 620.600889a17.066667 17.066667 0 0 1-24.120889 24.149333L171.804444 544.142222a45.511111 45.511111 0 0 1 0-64.341333l100.579556-100.579556a17.066667 17.066667 0 0 1 24.120889 24.149334L195.982222 503.950222a11.377778 11.377778 0 0 0 0 16.099556l100.551111 100.551111zM594.574222 289.820444l30.151111 16.014223-219.448889 412.672-30.151111-16.014223zM727.495111 620.600889a17.066667 17.066667 0 0 0 24.120889 24.149333l100.579556-100.579555a45.511111 45.511111 0 0 0 0-64.341334l-100.579556-100.579555a17.066667 17.066667 0 0 0-24.120889 24.149333l100.551111 100.551111a11.377778 11.377778 0 0 1 0 16.099556l-100.551111 100.551111z"></path>
+            </svg>
+            <h2>我要体验</h2>
+            <div class="mdui-typo">
+                <img src="data:image/png;base64,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">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<!--<script src="/static/js/login.js"></script>-->
+<script>
+    //登录提交
+    $('.btn').click(function () {
+        $('.mdui-progress').removeClass('mdui-hidden');
+        $('.indicator').show();
+        //取表账号密码值
+        var user = $('.user').val(); //账号
+        var password = md5($('.password').val());  //密码
+        var code = $('.code').val();  //验证码
+        var data = 'user='+user+'&password='+password+'&code='+code;//参数拼接
+        //ajax部分
+        var url;
+        $.post("index.php/index/index/login", {user:user, password:password,code:code},function (data) {
+            var jsonObj =JSON.parse(data);
+            if(jsonObj.url){
+                url =jsonObj.url;
+                window.location = jsonObj.url;
+                $('.mdui-progress').addClass('mdui-hidden');
+            }else {
+                update_verify();
+                mdui.snackbar({
+                    message:  jsonObj.tips
+                });
+                $('.mdui-progress').addClass('mdui-hidden');
+            }
+        });
+        return false;
+    });
+
+    var url;  //url地址准备
+    $.getJSON('/index.php/index/index/json',function (json) {
+        if(json.isLogin ==1){
+            $('.head').empty();
+            var html = '<div class="mdui-card-header ok"  mdui-menu="{target: \'#example-attr\'}">\n' +
+                '                            <img class="mdui-card-header-avatar"  src="/static/img/avatar.jpg"/>\n' +
+                '                            <div class="mdui-card-header-title name"></div>\n' +
+                '                            <div class="mdui-card-header-subtitle aut"></div>\n' +
+                '                        </div>\n' +
+                '                        <ul class="mdui-menu mdui-menu-cascade" id="example-attr">\n' +
+                '                       </ul>';
+            $('.head').append(html);
+            $.getJSON('/index.php/index/index/url',function (jsonUrl) {
+                var html2 = ' <li class="mdui-menu-item">\n' +
+                    '                            <a class="action mdui-ripple" href="'+ jsonUrl.url +'">进入</a>\n' +
+                    '                            </li>\n' +
+                    '                            <li class="mdui-divider"></li>\n' +
+                    '                            <li class="mdui-menu-item">\n' +
+                    '                                <a href=\'/index.php/index/index/quit\' class="quit mdui-ripple">退出</a>\n' +
+                    '                            </li>';
+                $('#example-attr').append(html2);
+            });
+        }else {
+            $('.login').removeClass('mdui-hidden');
+        }
+        $('.name').text(json.name);
+        $('.aut').text(json.state);
+    });
+    //验证码刷新
+    function update_verify(){
+        $('.captcha').attr('src','/index.php/index/index/verify');
+    }
+
+    //刷新验证码事件
+    $('.captcha').click(function () {
+        update_verify();
+    });
+
+    //忘记密码
+    $('.forget_password').click(function () {
+        alert('请联系网站管理员');
+    });
+    //注册
+    $('.reg').click(function () {
+        alert("暂时未开发注册 请联系网站管理员配置帐号")
+    });
+
+</script>
+
+<script>
+    $("[type=checkbox]").click(function () {
+        if($(this).is(":checked")){
+            $('.img').removeClass('mdui-hidden');
+        }else{
+            $('.img').addClass('mdui-hidden');
+        }
+    })
+</script>

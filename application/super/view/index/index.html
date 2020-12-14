@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>超管工具</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/static/js/xlsx.core.min.js"></script>
+<!--    <script type="text/javascript" src="/static/js/xlsx.full.min.js"></script>-->
+    <style>
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+    </style>
+</head>
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-red mdui-appbar-with-toolbar">
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <i class="mdui-icon material-icons">supervisor_account</i>
+        <a class="mdui-typo-title" style="margin-left: -10px">超管工具<button mdui-dialog="{target: '#exampleDialog',modal:true}" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '说明'}"><i class="mdui-icon material-icons">help_outline</i></button></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <button class="mdui-btn mdui-ripple" mdui-menu="{target: '#example-attr'}">更多</button>
+        <ul class="mdui-menu mdui-menu-cascade" id="example-attr">
+<!--            <li class="mdui-menu-item">-->
+<!--                <a href="/index.php/super/tools/index" target="_blank" class="mdui-ripple">编号工具</a>-->
+<!--            </li>-->
+            <li class="mdui-menu-item">
+                <a href="/index.php/super/login/quit" class="mdui-ripple">退出</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mdui-progress mdui-hidden">
+        <div class="mdui-progress-indeterminate"></div>
+    </div>
+</header>
+
+<!--说明文本框-->
+<div class="mdui-dialog " id="exampleDialog">
+    <div class="mdui-dialog-title ">使用说明</div>
+    <div class="mdui-dialog-content">
+      数据文件导入说明:<br/>
+        文件格式：xlsx，xls<br/>
+        大小：<8M<br/><br/>
+        数据要求：<br/>
+            帐号ID：长度 < 6 > 25，纯数字<br/>
+            密码：长度 < 6 > 32 ,字母或数字组合<br/>
+            权限： 0 或 1; 0:普通管理员，1:超级管理员<br/>
+            班级ID： 长度 < 5 纯数字<br/>
+            班级名字：长度 > 128
+    </div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>知道了</button>
+    </div>
+</div>
+
+<div class="mdui-container mdui-m-y-2" >
+    <!-- CONTENT -->
+    <div class="mdui-panel" mdui-panel>
+        <div class="mdui-panel-item">
+            <div class="mdui-panel-item-header">导入班主任信息</div>
+            <div class="mdui-panel-item-body">
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">选择表格文件</label>
+                    <input accept=".xlsx,.xls" id="h_f" class="mdui-textfield-input file"  type="file"/>
+                </div>
+                <button  class="h_config mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">导入</button>
+                <div class="mdui-m-t-2 mdui-float-right">请遵守数据格式规范<a href="/static/template/tempH.xlsx" download="班主任信息模板.xlsx">下载模板</a></div>
+            </div>
+        </div>
+
+        <div class="mdui-panel-item">
+            <div class="mdui-panel-item-header">导入班级配置</div>
+            <div class="mdui-panel-item-body">
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">选择表格文件</label>
+                    <input accept=".xlsx,.xls"  id="c_f" class="mdui-textfield-input" type="file"/>
+                </div>
+                <button  class="c_config mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">导入</button>
+                <div class="mdui-m-t-2 mdui-float-right">请遵守数据格式规范<a href="/static/template/tempC.xlsx" download="班级信息配置模板.xlsx">下载模板</a></div>
+            </div>
+        </div>
+
+        <div class="mdui-panel-item">
+            <div class="mdui-panel-item-header">导入课任教师配置</div>
+            <div class="mdui-panel-item-body">
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">选择表格文件</label>
+                    <input accept=".xlsx,.xls" id="t_f" class="mdui-textfield-input" type="file"/>
+                </div>
+                <button  class="t_config mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">导入</button>
+                <div class="mdui-m-t-2 mdui-float-right">请遵守数据格式规范<a href="/static/template/tempT.xlsx" download="课任教师配置模板.xlsx" >下载模板</a></div>
+            </div>
+        </div>
+    </div>
+
+<!--配置信息表-->
+    <div>
+<!--        帐户信息表-->
+        <div class="mdui-m-t-3 all_acc mdui-hidden">
+            <span style="font-weight: 300;font-style: italic; font-size: 25px;color: #b0bec5">全部帐户</span>
+            <div class="mdui-card">
+                <div class="mdui-table-fluid">
+                    <table class="mdui-table mdui-table-hoverable">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>姓名</th>
+                            <th>帐号</th>
+                            <th>权限</th>
+                            <th>添加时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table_body_h">
+
+                        </tbody>
+                    </table>
+                </div>
+                <!--            分页按钮-->
+                <div class="mdui-m-y-2 mdui-text-center mdui-hidden">
+                    <button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple upH"><i class="mdui-icon material-icons">chevron_left</i></button>
+                    <span class="page">1</span>/<span class="page_length">2</span>
+                    <button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple downH"><i class="mdui-icon material-icons">chevron_right</i></button>
+                </div>
+            </div>
+        </div>
+
+<!--         班级信息表-->
+        <div class="mdui-m-t-3 all_calss mdui-hidden">
+            <span style="font-weight: 300;font-style: italic; font-size: 25px;color: #b0bec5">全部班级</span>
+            <div class="mdui-table-fluid  mdui-card">
+                <table class="mdui-table mdui-table-hoverable">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>班级</th>
+                        <th>班主任</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table_body_c">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            分页按钮-->
+            <div class="mdui-m-y-2 mdui-text-center mdui-hidden">
+                <button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">chevron_left</i></button>
+                <span class="page">1</span>/<span class="page_length">2</span>
+                <button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">chevron_right</i></button>
+            </div>
+        </div>
+
+<!--        课任教师表-->
+        <div class="mdui-m-t-3  all_teacher mdui-hidden">
+            <span style="font-weight: 300;font-style: italic; font-size: 25px;color: #b0bec5">全部课任老师</span>
+            <div class="mdui-table-fluid mdui-card">
+                <table class="mdui-table mdui-table-hoverable">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>班级</th>
+                        <th>课任老师</th>
+                        <th>添加时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table_body_t">
+
+                    </tbody>
+                </table>
+            </div>
+            <!--            分页按钮-->
+            <div class="mdui-m-y-2 mdui-text-center mdui-hidden">
+                <button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">chevron_left</i></button>
+                <span class="page">1</span>/<span class="page_length">2</span>
+                <button class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">chevron_right</i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--导入信息框-->
+<div class="mdui-dialog" id="input_info">
+    <div class="mdui-dialog-content">
+        <div class="mdui-dialog-title ">导入结果</div>
+        <div>
+            <p>总记录数:<span class="total"></span></p>
+            <p>成功记录:<span class="success"></span></p>
+            <p>失败记录:<span class="error">0</span></p>
+            <div class="error_info">
+
+            </div>
+        </div>
+    </div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    // var g_json;
+    /**
+     * 获取本地excel表格数据
+     */
+    function readWorkbookFromLocalFile(file,post) {
+        var reader = new FileReader();
+        reader.onload = e => {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+            outputWorkbook(workbook)
+            if(post) post();
+        };
+        reader.readAsBinaryString(file);
+    }
+
+    /**
+     * 数据转换操作
+     * @param workbook
+     */
+    function outputWorkbook(workbook) {
+            let worksheet = workbook.Sheets['Sheet1']; //只读取sheet1的数据
+            let json = XLSX.utils.sheet_to_json(worksheet)   //转json
+            g_json = JSON.stringify(json);
+    }
+
+    //班主任信息导入
+    $('.h_config').click(() => {
+        if($('#h_f').get(0).files[0] == null){
+            mdui.snackbar({
+                message: '请先选择表格文件'
+            });
+            return;
+        }
+        $('.mdui-progress').removeClass('mdui-hidden');
+        readWorkbookFromLocalFile($('#h_f').get(0).files[0],()=>{
+           $.post('/index.php/super/index/importH',{data:g_json},(json) => {
+               json = JSON.parse(json);
+              // console.log(json);
+               if(!json['code']){
+                   mdui.snackbar({
+                       message: json['meg']
+                   });
+                   $('.mdui-progress').addClass("mdui-hidden");
+                   return;
+               }
+               var inst = new mdui.Dialog("#input_info", {modal:true});
+               $('.error_info').html("");
+               $('.total').text(json['success'].length + json['error'].length);
+               $('.success').text(json['success'].length);
+               $('.error').text(json['error'].length);
+               if(json['error'].length > 0){
+                   json['error'].forEach(function (v,i) {
+                        $('.error_info').append("<p>"+ json['error'][i] +"</p>");
+                   });
+               }
+               if(json['success'].length > 0){
+                   initH();
+               }
+               inst.open();
+               $('.mdui-progress').addClass("mdui-hidden");
+           });
+        });
+    });
+
+    //班级配置导入
+    $('.c_config').click(function () {
+        if($('#c_f').get(0).files[0] == null){
+            mdui.snackbar({
+                message: '请先选择表格文件'
+            });
+            return;
+        }
+        readWorkbookFromLocalFile($('#c_f').get(0).files[0],()=>{
+            $.post('/index.php/super/index/importC',{data:g_json},(json) => {
+                json = JSON.parse(json);
+                if(!json['code']){
+                    mdui.snackbar({
+                        message: json['meg']
+                    });
+                    $('.mdui-progress').addClass("mdui-hidden");
+                    return;
+                }
+                var inst = new mdui.Dialog("#input_info", {modal:true});
+                $('.error_info').html("");
+                $('.total').text(json['success'].length + json['error'].length);
+                $('.success').text(json['success'].length);
+                $('.error').text(json['error'].length);
+                if(json['error'].length > 0){
+                    json['error'].forEach(function (v,i) {
+                        $('.error_info').append("<p>"+ json['error'][i] +"</p>");
+                    });
+                }
+                if(json['success'].length > 0){
+                    initC();
+                }
+                inst.open();
+                $('.mdui-progress').addClass("mdui-hidden");
+            });
+        });
+    });
+
+    //课任教师配置导入
+    $('.t_config').click(function () {
+        if($('#t_f').get(0).files[0] == null){
+            mdui.snackbar({
+                message: '请先选择表格文件'
+            });
+            return;
+        }
+        readWorkbookFromLocalFile($('#t_f').get(0).files[0],()=>{
+            $.post('/index.php/super/index/importT',{data:g_json},(json) => {
+                json = JSON.parse(json);
+                if(!json['code']){
+                    mdui.snackbar({
+                        message: json['meg']
+                    });
+                    $('.mdui-progress').addClass("mdui-hidden");
+                    return;
+                }
+                var inst = new mdui.Dialog("#input_info", {modal:true});
+                $('.error_info').html("");
+                $('.total').text(json['success'].length + json['error'].length);
+                $('.success').text(json['success'].length);
+                $('.error').text(json['error'].length);
+                if(json['error'].length > 0){
+                    json['error'].forEach(function (v,i) {
+                        $('.error_info').append("<p>"+ json['error'][i] +"</p>");
+                    });
+                }
+                if(json['success'].length > 0){
+                    initT();
+                }
+                inst.open();
+                $('.mdui-progress').addClass("mdui-hidden");
+            });
+        });
+    });
+
+
+    /*
+    页面数据初始化
+     */
+    function initH(page = 0,length = 20) {
+        $.get('/index.php/super/index/dataH/page/'+page+'/length/'+length,function (json) {
+            //  console.log(json)
+            if(json.code){
+                $('.table_body_h').html('');
+                $('.all_acc').removeClass('mdui-hidden');
+                for(let i= 0;i<json['res'].length;i++){
+                    let html = "<tr>\n" +
+                        "                            <td nowrap>"+(i+1)+"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['hname'] +"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['hid'] +"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['state'] +"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['create'] +"</td>\n" +
+                        "                            <td nowrap><button class=\"mdui-btn mdui-btn-icon mdui-ripple modify\"><i class=\"mdui-icon material-icons\">mode_edit</i></button><button class=\"mdui-btn mdui-btn-icon mdui-ripple delete_h\"><i class=\"mdui-icon material-icons\">delete</i></button></td>\n" +
+                        "                        </tr>";
+                    $('.table_body_h').append(html);
+                }
+            }else{
+                $('.all_acc').addClass('mdui-hidden');
+                mdui.snackbar({
+                    message: json['meg']
+                });
+            }
+        },'json');
+    }
+
+    function initC(page = 0,length = 20) {
+        $.get('/index.php/super/index/dataC/page/'+page+'/length/'+length,function (json) {
+           // console.log(json.res)
+            if(json.code){
+                $('.table_body_c').html("");
+                $('.all_calss').removeClass('mdui-hidden');
+                for(let i= 0;i<json['res'].length;i++){
+                    let html = "<tr>\n" +
+                        "                            <td nowrap>"+(i+1)+"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['classname'] +"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['hname'] +"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['create'] +"</td>\n" +
+                        "                            <td nowrap class='mdui-hidden'><div><span class='classid'>"+ json['res'][i]['classid'] +"</span><span class='hid'>"+ json['res'][i]['hid'] +"</span></div></td>\n" +
+                        "                            <td nowrap><button class=\"mdui-btn mdui-btn-icon mdui-ripple\"><i class=\"mdui-icon material-icons delete_c\">delete</i></button></td>\n" +
+                        "                        </tr>";
+                    $('.table_body_c').append(html);
+                }
+            }else {
+                $('.all_calss').addClass('mdui-hidden');
+                mdui.snackbar({
+                    message: json['meg']
+                });
+            }
+        },'json');
+    }
+
+    function initT(page = 0,length = 20) {
+        $.get('/index.php/super/index/dataT/page/'+page+'/length/'+length,function (json) {
+         //  console.log(json);
+            if(json.code){
+                $('.table_body_t').html("");
+                $('.all_teacher').removeClass('mdui-hidden');
+                for(let i= 0;i<json['res'].length;i++){
+                    let html = "<tr>\n" +
+                        "                            <td nowrap>"+(i+1)+"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['classname'] +"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['tname'] +"</td>\n" +
+                        "                            <td nowrap>"+ json['res'][i]['create'] +"</td>\n" +
+                        "                            <td nowrap class='mdui-hidden'><div><span class='classid'>"+ json['res'][i]['classid'] +"</span><span class='tid'>"+ json['res'][i]['tid'] +"</span></div></td>\n" +
+                        "                            <td nowrap><button class=\"mdui-btn mdui-btn-icon mdui-ripple delete_t\"><i class=\"mdui-icon material-icons\">delete</i></button></td>\n" +
+                        "                        </tr>";
+                    $('.table_body_t').append(html);
+                }
+            }else {
+                $('.all_teacher').addClass('mdui-hidden');
+                mdui.snackbar({
+                    message: json['meg']
+                });
+            }
+        },'json');
+    }
+
+    initH();initC();initT();
+
+    //删除账号
+    $('.table_body_h').on('click','.delete_h',function () {
+        let hid = $(this).parent().prev().prev().prev().text();
+        mdui.confirm('确定要删除该账号吗?', function(){
+            $.post('/index.php/super/index/deleteH',{hid:hid},function (json) {
+                // console.log(json);
+                if(json['code']) {
+                    initH()
+                    mdui.snackbar({
+                        message: json['meg']
+                    });
+                }
+            },'json');
+        },function () {
+        },{modal:true,confirmText:"确定",cancelText:"取消"});
+    });
+
+    //修改密码
+    $('.table_body_h').on('click','.modify',function () {
+            let hid = $(this).parent().prev().prev().prev().text();
+            // 含标题
+            mdui.prompt(hid, '修改密码',
+                function (value) {
+                    if(value !=""){
+                        $.post('/index.php/super/index/modify',{hid:hid,password:value},function (json) {
+                            // console.log(json);
+                            if(json['code']) {
+                                mdui.snackbar({
+                                    message: json['meg']
+                                });
+                            }else {
+                                mdui.snackbar({
+                                    message: json['meg']
+                                });
+                            }
+                        },'json');
+                    }
+                },
+                function (value) {
+                },{modal:true,confirmText:"确定",cancelText:"取消"}
+            );
+    });
+
+    //删除班级
+    $('.table_body_c').on('click','.delete_c',function () {
+        let classid = $(this).parent().parent().prev().find('.classid').text();
+        let hid = $(this).parent().parent().prev().find('.hid').text();
+
+        mdui.confirm('确定删除该班级吗？',
+            function(){
+                $.post('/index.php/super/index/deleteC',{classid:classid,hid:hid},function (json) {
+                    if(json.code){
+                        initC();
+                        mdui.snackbar({
+                            message: json['meg']
+                        });
+                    }else {
+                        mdui.snackbar({
+                            message: json['meg']
+                        });
+                    }
+                },'json');
+            },
+            function(){
+            },{modal:true,confirmText:"确定",cancelText:"取消"}
+        );
+    });
+
+    //删除课任教师
+    $('.table_body_t').on('click','.delete_t',function () {
+        var classid = $(this).parent().prev().find('.classid').text();
+        var  tid =     $(this).parent().prev().find('.tid').text();
+
+        // 含文本、确认按钮和取消按钮回调
+        mdui.confirm('确定删除吗？',
+            function(){
+                $.post('/index.php/super/index/deleteT',{classid:classid,tid:tid},function (json) {
+                  //  console.log(json);
+                    if(json.code){
+                        initT();
+                        mdui.snackbar({
+                            message: json['meg']
+                        });
+                    }else {
+                        mdui.snackbar({
+                            message: json['meg']
+                        });
+                    }
+                },'json');
+            },
+            function(){
+            },{modal:true,confirmText:"确定",cancelText:"取消"}
+        );
+    });
+
+</script>

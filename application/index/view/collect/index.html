@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作业收集</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+    </style>
+</head>
+
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-red mdui-appbar-with-toolbar">
+
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer', swipe: true}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <a class="mdui-typo-title" style="margin-left: -10px">作业收集</a>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="/index.php/index/collect/form"><button class="mdui-btn">我的创建</button></a>
+    </div>
+</header>
+
+<div class="mdui-drawer mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list" mdui-collapse="{accordion: true}">
+        <li class="mdui-list-item mdui-ripple" onclick="window.open('/index.php/index/index/home','_self')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+            <div class="mdui-list-item-content">首页</div>
+        </li>
+
+        <a href="/index.php/index/call/classlist">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                <div class="mdui-list-item-content">签到</div>
+            </li>
+        </a>
+
+        <a href="/index.php/index/Annal/index">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                <div class="mdui-list-item-content">查看签到记录</div>
+            </li>
+        </a>
+
+    </ul>
+    <div class="mdui-divider"></div>
+    <ul class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+        <li class="mdui-list-item mdui-ripple" mdui-dialog="{target: '#info'}">
+            <i class="mdui-list-item-icon mdui-icon material-icons">info</i>
+            <div class="mdui-list-item-content">关于</div>
+        </li>
+
+    </ul>
+</div>
+
+<div class="mdui-dialog" id="info">
+    <div class="mdui-dialog-title">关于</div>
+    <div class="mdui-dialog-content">Author：小嵩</div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+    </div>
+</div>
+
+<div class="mdui-container mdui-m-y-5 mdui-card" style="max-width: 840px">
+    <!-- CONTENT -->
+    <div class="">
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">题目</label>
+            <input class="mdui-textfield-input title" type="text"/>
+        </div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">题目描述</label>
+            <input class="mdui-textfield-input info" maxlength="30" type="text"/>
+        </div>
+        <div class="mdui-m-t-2">
+            <label class="mdui-m-l-1 mdui-checkbox">
+                <input  name="modify" value="2" type="checkbox"/>
+                <i class="mdui-checkbox-icon"></i>
+                允许填写者再次修改
+            </label>
+            <i mdui-tooltip="{content: '前面提交的会被后面提交的覆盖(默认不允许)'}" class="mdui-icon material-icons">&#xe8fd;</i>
+            <button mdui-dialog="{target: '#limit'}" class="mdui-btn mdui-ripple mdui-text-color-blue-900">更多限制</button>
+            <div id="limit" class="mdui-dialog">
+                <div class="mdui-dialog-content">
+                    <p>
+                        <label class="mdui-radio mdui-m-r-2 ">
+                            <input type="radio" value="3" name="group1" />
+                            <i class="mdui-radio-icon"></i>
+                            都允许
+                        </label>
+                    </p>
+                    <p>
+                        <label class="mdui-radio">
+                            <input type="radio" value="2" name="group1"/>
+                            <i class="mdui-radio-icon"></i>
+                            收集文档文件
+                        </label>
+                    </p>
+                    <p>
+                        <label class="mdui-radio mdui-m-r-2 ">
+                            <input type="radio" value="1" name="group1" checked/>
+                            <i class="mdui-radio-icon"></i>
+                            收集文本内容
+                        </label>
+                    </p>
+
+                    <div>
+                        <div>
+                            <label class="mdui-checkbox">
+                                <input type="checkbox" id="checkStatus"/>
+                                <i class="mdui-checkbox-icon"></i>
+                                指定班级
+                            </label>
+                            <button class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '验证班级内学号是否一致'}"><i class="mdui-icon material-icons">&#xe8fd;</i></button>
+                        </div>
+                        <div class="mdui-m-l-4 mdui-hidden class">
+                            <select class="class_id mdui-select" id="class">
+
+                                <!-- 占位-->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdui-dialog-actions">
+                    <button class="mdui-btn mdui-ripple" mdui-dialog-close>取消</button>
+                    <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mdui-m-t-2 mdui-divider"></div>
+        <div class="mdui-textfield">
+            <label class="mdui-textfield-label">截止时间</label>
+            <input class="mdui-textfield-input end_time" type="datetime-local"/>
+        </div>
+        <div class="mdui-m-t-3">
+            <button class="mdui-m-y-3 action mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">创建</button>
+        </div>
+    </div>
+
+<!--        创建结果信息框-->
+    <div class="mdui-dialog" id="exampleDialog">
+        <button mdui-dialog-close class="mdui-btn mdui-btn-icon mdui-btn-dense  mdui-ripple"><i class="mdui-icon material-icons">&#xe5cd;</i></button>
+        <div>
+            <i style="color: #0d47a1" class="mdui-center mdui-icon material-icons">&#xe86c;</i>
+            <div  class="mdui-text-center mdui-m-t-1 mdui-center" style="padding-bottom: 0px">创建成功</div>
+        </div>
+
+        <div class="result" style="padding-left: 24px;padding-right: 24px">
+            <div class="mdui-hidden mdui-center mdui-spinner mdui-spinner-colorful"></div>
+            <div class="mdui-textfield">
+                <label class="mdui-textfield-label">分享打开链接即可提交作业</label>
+                <input class="mdui-textfield-input" readonly id="url" type="text"/>
+            </div>
+            <div class="mdui-dialog-actions">
+                <button class=" mdui-btn mdui-ripple" id="copy" >复制</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+</div>
+</body>
+</html>
+
+<script>
+
+    /**
+     *  获取当前账号带领的班级 循环到下拉列表提供选择用
+     */
+    $.getJSON('/index.php/index/call/json',function (json) {
+        json = json.res;
+        $.each(json,function (i) {
+            $('.class_id').append('<option value="'+ json[i].classid+'">'+ json[i].classname+'</option>');
+        });
+        $('.class_id').attr('mdui-select',"{position: 'bottom'}");
+        mdui.mutation()
+    })
+
+    $('.action').click(function () {
+        var title= $('.title').val(); //标题
+        var info = $('.info').val();  //备注信息
+        var modify = $('input[name="modify"]:checked').val()?$('input[name="modify"]:checked').val():1; //允许填写者再次修改  1 不允许  2允许
+        var doc = $('input[name="group1"]:checked').val(); //是否有文档
+        var end_time =$('.end_time').val();  //截止时间
+        var senddata = {title:title,info:info,modify:modify,doc:doc,end_time:end_time};
+        if($('#checkStatus').is(':checked')){
+            var classid = $("#class option:selected").val(); //取下拉列表值
+            var senddata = {title:title,info:info,modify:modify,classid:classid,doc:doc,end_time:end_time};
+        }
+
+        $.post('/index.php/index/collect/work',senddata,function (json) {
+          //  console.log(json);
+            var data =JSON.parse(json)
+            if(data.result ==1){
+                var inst = new mdui.Dialog('#exampleDialog',{modal:true});
+                $('#url').val(data.url);
+                inst.open();
+            }else {
+                mdui.snackbar({
+                    message: data.tips
+                });
+            }
+        });
+    });
+
+    //班级限制
+    $('#checkStatus').click(function () {
+        var checkStatus = $('#checkStatus').is(':checked');
+        if(checkStatus){
+            $('.class').removeClass('mdui-hidden');
+        }else {
+            $('.class').addClass('mdui-hidden');
+        }
+    });
+
+     //复制链接
+     $('#copy').click(function () {
+         var url = $('#url');
+         url.select();
+         var bool = document.execCommand("Copy",true);
+         if(bool){
+             mdui.snackbar({
+                 message: "复制成功"
+             });
+         }else {
+             mdui.snackbar({
+                 message: "复制失败 请手动复制"
+             });
+         }
+     });
+
+     //关闭事件
+    var dialog = document.getElementById('exampleDialog');
+    dialog.addEventListener('closed.mdui.dialog', function () {
+        location.href = "/index.php/index/collect/form";
+    });
+
+
+</script>
+
+
+

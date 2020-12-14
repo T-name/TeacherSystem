@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>班级列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+
+        }
+
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+
+    </style>
+</head>
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-red mdui-appbar-with-toolbar">
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer', swipe: true}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <a class="mdui-typo-title" style="margin-left: -10px">班级成员列表</a>
+        <div class="mdui-toolbar-spacer"></div>
+        <button class="mdui-btn mdui-ripple mdui-ripple-white" mdui-dialog="{target: '#MessageBox',modal:true}">班级备注</button>
+    </div>
+    <div class="mdui-progress init">
+        <div class="mdui-progress-indeterminate"></div>
+    </div>
+</header>
+
+<div class="mdui-drawer mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list" mdui-collapse="{accordion: true}">
+        <li class="mdui-list-item mdui-ripple" onclick="window.open('/index.php/index/index/home','_self')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+            <div class="mdui-list-item-content">首页</div>
+        </li>
+
+        <a href="/index.php/index/Annal/index">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                <div class="mdui-list-item-content">查看签到记录</div>
+            </li>
+        </a>
+        <li class="mdui-collapse-item">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe1b2;</i>
+                <div class="mdui-list-item-content">作业收集</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a href="/index.php/index/collect/index">
+                    <li class="mdui-list-item mdui-ripple">创建</li>
+                </a>
+                <a href="/index.php/index/collect/form">
+                    <li class="mdui-list-item mdui-ripple">查看创建</li>
+                </a>
+            </ul>
+        </li>
+    </ul>
+    <div class="mdui-divider"></div>
+    <ul class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+        <li class="mdui-list-item mdui-ripple" mdui-dialog="{target: '#info'}">
+            <i class="mdui-list-item-icon mdui-icon material-icons">info</i>
+            <div class="mdui-list-item-content">关于</div>
+        </li>
+    </ul>
+</div>
+
+<div class="mdui-dialog" id="MessageBox">
+    <div class="mdui-dialog-title">备注信息</div>
+    <div class="mdui-dialog-content">
+        <ul class="mdui-list message_list">
+            <li class="mdui-list-item mdui-ripple message_null">暂无有效备注信息</li>
+        </ul>
+    </div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-close>确定</button>
+    </div>
+</div>
+
+<div class="mdui-dialog" id="info">
+    <div class="mdui-dialog-title">关于</div>
+    <div class="mdui-dialog-content">Author：小嵩</div>
+    <div class="mdui-m-l-2 mdui-typo mdui-text-color-theme-disabled">
+        <p>{$version|default="2.2"}</p>
+    </div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+    </div>
+</div>
+
+<div class="mdui-container-fluid mdui-m-y-5" style="max-width: 840px">
+    <!-- CONTENT -->
+    <div class="classname">
+
+    </div>
+    <form class="form"method="post" action="/index.php/index/call/getPost">
+
+    </form>
+<!--    对话框-->
+    <div class="mdui-dialog" id="exampleDialog">
+        <div class="mdui-dialog-content">确定提交吗？</div>
+        <div class="mdui-dialog-actions">
+            <button class="ok mdui-btn mdui-ripple" mdui-dialog-close>确定</button>
+            <button class="cancel mdui-btn mdui-ripple" mdui-dialog-confirm>取消</button>
+        </div>
+    </div>
+    <div class="mdui-m-t-3"></div>
+    <!-- CONTENT -->
+</div>
+</body>
+</html>
+
+<script>
+    <!--    获取班级成员-->
+    $.getJSON('/index.php/index/call/member',function (json) {
+        // console.log(json);
+       if(json.code){
+           json= json.res;
+           var bool = false;
+           $.each(json,function (i) {
+               var html ="<ul   class=\" mdui-list\">\n" +
+                   "            <li class=\"li mdui-list-item \">\n" +
+                   "                 <i class=\"mdui-list-item-avatar mdui-icon material-icons\">person</i>\n" +
+                   " <div class=\"mdui-list-item-content\">\n" +
+                   "                    <div class=\"mdui-list-item-title\">"+json[i].name+"</div>\n" +
+                   "                    <div class=\"mdui-list-item-text mdui-list-item-one-line\" style='font-size: 10px'><span class=\"mdui-text-color-theme-text\">学号：</span> "+json[i].sid+"</div>\n" +
+                   "                </div>"+
+                   "                <select id=\"list\"  name=\""+json[i].sid+"status\" class=\"select mdui-select\" mdui-select=\"{position: 'bottom'}\">\n" +
+                   "                    <option value=\"1\">正常</option>\n" +
+                   "                    <option value=\"2\">迟到</option>\n" +
+                   "                    <option value=\"3\">旷课</option>\n" +
+                   "                    <option value=\"4\">早退</option>\n" +
+                   "                    <option value=\"5\">请假</option>\n" +
+                   "                    <option value=\"6\">其他</option>\n" +
+                   "                </select>\n" +
+                   "            </li>\n" +
+                   "        </ul>";
+               $('.form').append(html);
+               if(json[i]["note"]){
+                   $('.message_null').addClass('mdui-hidden');
+                   //console.log(json[i]["note"]);
+                   for(let val in json[i]["note"]){
+                       $('.message_list').append(`<li class="mdui-list-item mdui-ripple"><div class="mdui-list-item-content"> <div class="mdui-list-item-title mdui-list-item-one-line">${json[i]["name"]}</div> <div class="mdui-list-item-text mdui-list-item-two-line">${json[i]["note"][val].mseeage}</div></div></li>`);
+                     //  console.log(json[i]["note"][val]);
+                   }
+                   bool = true;
+               }
+               mdui.mutation()      //mdui动态生成select组件
+           });
+           if(bool){
+               var inst = new mdui.Dialog('#MessageBox', {modal:true});
+               inst.open();
+           }
+           $('.form').append("<input  mdui-dialog=\"{target: '#exampleDialog'}\" type='submit' class=\"action mdui-m-t-2 mdui-btn-block mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent\"  value='提交'/>");
+           $.getJSON('/index.php/index/call/className',function (json) {
+               if(json.code){
+                   var html = "<div class=\"mdui-chip mdui-valign\">\n" +
+                       "            <span  class=\"mdui-center mdui-chip-title\">"+json.calssname+"</span>\n" +
+                       "        </div>";
+                   $('.classname').append(html)
+               }else {
+                   var html = "<div class=\"mdui-chip mdui-valign\">\n" +
+                       "            <span  class=\"mdui-center mdui-chip-title\">"+json.msg+"</span>\n" +
+                       "        </div>";
+                   $('.classname').append(html)
+                   return;
+               }
+           });
+
+           if(json.length==0){
+               $('.action').css('display','none');
+               $('.classname').append(`<div class="mdui-chip mdui-valign">
+                   <span class="mdui-center mdui-chip-title">该班级无学生信息</span>
+                   </div>`)
+           }
+           //取消表单默认提交动作
+           $('form').submit(function () {
+               return false;
+           });
+       }else {
+           $('.classname').append("<div class='mdui-text-center' style='font-size: 20px'>"+json.msg+"</div>")
+       }
+        $('.init').addClass('mdui-hidden');
+    });
+
+    //提交确认
+    $('.ok').click(function () {
+        var obj = $('form').serialize();
+        //console.log(obj);
+        $.post('/index.php/index/call/getPost',obj,function (json) {
+           var json= JSON.parse(json);
+           if(json.code){
+               mdui.snackbar({
+                   message: json.meg
+               });
+           }else{
+               mdui.snackbar({
+                   message: json.meg
+               });
+           }
+        });
+    });
+</script>
+
+
+

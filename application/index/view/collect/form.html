@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>我的创建</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <script src="/static/js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="/static/css/mdui.css">
+    <script src="/static/js/mdui.js"></script>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 28' width='56' height='28'%3E%3Cpath fill='%23EDF1F6' fill-opacity='1' d='M56 26v2h-7.75c2.3-1.27 4.94-2 7.75-2zm-26 2a2 2 0 1 0-4 0h-4.09A25.98 25.98 0 0 0 0 16v-2c.67 0 1.34.02 2 .07V14a2 2 0 0 0-2-2v-2a4 4 0 0 1 3.98 3.6 28.09 28.09 0 0 1 2.8-3.86A8 8 0 0 0 0 6V4a9.99 9.99 0 0 1 8.17 4.23c.94-.95 1.96-1.83 3.03-2.63A13.98 13.98 0 0 0 0 0h7.75c2 1.1 3.73 2.63 5.1 4.45 1.12-.72 2.3-1.37 3.53-1.93A20.1 20.1 0 0 0 14.28 0h2.7c.45.56.88 1.14 1.29 1.74 1.3-.48 2.63-.87 4-1.15-.11-.2-.23-.4-.36-.59H26v.07a28.4 28.4 0 0 1 4 0V0h4.09l-.37.59c1.38.28 2.72.67 4.01 1.15.4-.6.84-1.18 1.3-1.74h2.69a20.1 20.1 0 0 0-2.1 2.52c1.23.56 2.41 1.2 3.54 1.93A16.08 16.08 0 0 1 48.25 0H56c-4.58 0-8.65 2.2-11.2 5.6 1.07.8 2.09 1.68 3.03 2.63A9.99 9.99 0 0 1 56 4v2a8 8 0 0 0-6.77 3.74c1.03 1.2 1.97 2.5 2.79 3.86A4 4 0 0 1 56 10v2a2 2 0 0 0-2 2.07 28.4 28.4 0 0 1 2-.07v2c-9.2 0-17.3 4.78-21.91 12H30zM7.75 28H0v-2c2.81 0 5.46.73 7.75 2zM56 20v2c-5.6 0-10.65 2.3-14.28 6h-2.7c4.04-4.89 10.15-8 16.98-8zm-39.03 8h-2.69C10.65 24.3 5.6 22 0 22v-2c6.83 0 12.94 3.11 16.97 8zm15.01-.4a28.09 28.09 0 0 1 2.8-3.86 8 8 0 0 0-13.55 0c1.03 1.2 1.97 2.5 2.79 3.86a4 4 0 0 1 7.96 0zm14.29-11.86c1.3-.48 2.63-.87 4-1.15a25.99 25.99 0 0 0-44.55 0c1.38.28 2.72.67 4.01 1.15a21.98 21.98 0 0 1 36.54 0zm-5.43 2.71c1.13-.72 2.3-1.37 3.54-1.93a19.98 19.98 0 0 0-32.76 0c1.23.56 2.41 1.2 3.54 1.93a15.98 15.98 0 0 1 25.68 0zm-4.67 3.78c.94-.95 1.96-1.83 3.03-2.63a13.98 13.98 0 0 0-22.4 0c1.07.8 2.09 1.68 3.03 2.63a9.99 9.99 0 0 1 16.34 0z'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .mdui-col-xs-3 .mdui-select {
+            float: right;
+        }
+    </style>
+</head>
+
+
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-red mdui-appbar-with-toolbar">
+
+<header class="mdui-appbar mdui-appbar-fixed">
+    <div class="mdui-toolbar mdui-color-theme">
+        <a class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#left-drawer', swipe: true}"><i
+                class="mdui-icon material-icons">menu</i></a>
+        <a class="mdui-typo-title" style="margin-left: -10px">我的创建</a>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="/index.php/index/collect/index"><button class="mdui-btn">创建</button></a>
+    </div>
+</header>
+
+<div class="mdui-drawer mdui-drawer-close" id="left-drawer">
+    <ul class="mdui-list" mdui-collapse="{accordion: true}">
+        <li class="mdui-list-item mdui-ripple" onclick="window.open('/index.php/index/index/home','_self')">
+            <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+            <div class="mdui-list-item-content">首页</div>
+        </li>
+
+        <a href="/index.php/index/call/classlist">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                <div class="mdui-list-item-content">签到</div>
+            </li>
+        </a>
+
+        <a href="/index.php/index/Annal/index">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">&#xe85d;</i>
+                <div class="mdui-list-item-content">查看签到记录</div>
+            </li>
+        </a>
+
+    </ul>
+    <div class="mdui-divider"></div>
+    <ul class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+        <li class="mdui-list-item mdui-ripple" mdui-dialog="{target: '#info'}">
+            <i class="mdui-list-item-icon mdui-icon material-icons">info</i>
+            <div class="mdui-list-item-content">关于</div>
+        </li>
+
+    </ul>
+</div>
+<div class="mdui-dialog" id="info">
+    <div class="mdui-dialog-title">关于</div>
+    <div class="mdui-dialog-content">Author：小嵩</div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+    </div>
+</div>
+
+<div class="mdui-container mdui-m-y-5 mdui-card" style="max-width: 840px">
+    <!-- CONTENT -->
+        <div>
+            <p class="mdui-text-center mdui-typo tips mdui-hidden">你还未创建过表单 快去<a href="/index.php/index/collect/index">创建</a>吧</p>
+            <ul class="mdui-list form_list mdui-hidden">
+            </ul>
+        </div>
+
+
+<!--修改对话框-->
+    <div class="mdui-dialog" id="modify">
+        <div class="mdui-dialog-title">表单修改</div>
+        <div class="mdui-dialog-content">
+            <div>
+                <div class="mdui-textfield">
+                    <span class="modify_number mdui-hidden"></span>
+                    <label class="mdui-textfield-label">题目</label>
+                    <input class="mdui-textfield-input modify_title" disabled type="text"/>
+                </div>
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">题目描述</label>
+                    <input class="mdui-textfield-input modify_info" maxlength="30" type="text"/>
+                </div>
+                <div class="mdui-m-t-2">
+                    <p>
+                        <label class="mdui-checkbox">
+                            <input  class="select_modify" name="modify" value="2" type="checkbox"/>
+                            <i class="mdui-checkbox-icon"></i>
+                            允许填写者再次修改
+                        </label>
+                        <i mdui-tooltip="{content: '前面提交的会被后面提交的覆盖(默认不允许)'}" class="mdui-icon material-icons">&#xe8fd;</i>
+                    </p>
+                    <div class="radio_group">
+                        <p>
+                            <label class="mdui-radio mdui-m-r-2 ">
+                                <input type="radio" value="1" name="group1" />
+                                <i class="mdui-radio-icon"></i>
+                                不允许文档
+                            </label>
+                        </p>
+                        <p>
+                            <label class="mdui-radio">
+                                <input type="radio" value="2" name="group1"/>
+                                <i class="mdui-radio-icon"></i>
+                                只允许文档
+                            </label>
+                        </p>
+                        <p>
+                            <label class="mdui-radio mdui-m-r-2 ">
+                                <input type="radio" value="3" name="group1" />
+                                <i class="mdui-radio-icon"></i>
+                                都允许
+                            </label>
+                        </p>
+                    </div>
+                </div>
+                <div class="mdui-m-t-2 mdui-divider"></div>
+                <div class="mdui-textfield">
+                    <label class="mdui-textfield-label">截止时间</label>
+                    <input  value="2020-06-20T12:00:00" class="mdui-textfield-input end_time" type="datetime-local"/>
+                </div>
+            </div>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple ok" mdui-dialog-confirm>确定</button>
+            <button class="mdui-btn mdui-ripple" mdui-dialog-close>取消</button>
+        </div>
+    </div>
+
+<!--    表单详情-->
+    <div id="form_info" class="mdui-dialog">
+        <div class="mdui-dialog-title">详情</div>
+        <div class="mdui-dialog-content">
+            <p class="mdui-hidden info_number"></p>
+            <p class="info_title"></p>
+            <p class="info_title_info"></p>
+            <p class="info_is_modify"></p>
+            <p class="info_is_doc"></p>
+            <p class="info_is_send">谁可以提交:全部</p>
+            <p class="info_end_time"></p>
+            <p class="info_url"></p>
+        </div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple delete" mdui-dialog-confirm>删除</button>
+            <button class="mdui-btn mdui-ripple open" mdui-dialog-confirm>进入</button>
+            <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>确定</button>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+</div>
+</body>
+</html>
+
+<script>
+    //初始化页面
+    function init(){
+        $.getJSON("/index.php/index/collect/forminfo",function (json) {
+              if(!json){
+                  mdui.snackbar({
+                      message: '你还没有创建过表单'
+                  });
+                  $('.tips').removeClass('mdui-hidden');
+                  $('.form_list').addClass('mdui-hidden');
+              }else {
+                  $('.form_list').removeClass('mdui-hidden');
+                  $('.tips').addClass('mdui-hidden');
+                  $('.form_list').html("");
+                  for (var i=0;i<json.length;i++){
+                      var html = '  <li class="  mdui-list-item mdui-ripple">\n' +
+                          '                    <div class="mdui-list-item-content form_info">\n' +
+                          '                        <span class="number mdui-hidden">'+json[i].number+'</span><div class="mdui-list-item-title title mdui-list-item-one-line">'+json[i].title+'</div><spna class="info mdui-hidden">'+json[i].info+'</spna>\n' +
+                          '                        <div class="mdui-list-item-text endtimeA mdui-list-item-one-line ">截止时间：<span class="endtimeB">'+json[i].endtime+'</span></div>\n' +
+                          '             <div class="mdui-hidden node"><span class="doc">'+json[i].doc+'</span><span class="modify">'+json[i].modify+'</span><span class="url">'+json[i].url+'</span><span class="send">'+ json[i].send +'</span></div>' +
+                          ' </div>\n' +
+                          '                    <i class="modify mdui-icon material-icons">&#xe150;</i><i class="mdui-icon more material-icons">&#xe5d4;</i>\n' +
+                          '                </li>';
+                      $('.form_list').append(html)
+                  }
+              }
+        });
+    }
+
+   init(); //初始化
+
+    //初始化修改对话框
+    $('.form_list').on('click','.modify',function () {
+        var inst = new mdui.Dialog('#modify',{modal:true});
+        var number = $(this).prev().children('.number').text();   //编号
+        var title = $(this).prev().children('.title').text()    //标题
+        var info = $(this).prev().children('.info').text();     //题目描述
+        var doc = $(this).prev().children('.node').children('.doc').text();  //是否可提交文档
+        var modify = $(this).prev().children('.node').children('.modify').text();  //是否可修改
+        var time = $(this).prev().children('.endtimeA').children('.endtimeB').text();     //题目描述
+        $('.modify_number').text(number);
+        $('.modify_title').val(title);
+        $('.modify_info').val(info);
+        if(modify ==2){
+            $('.select_modify').prop('checked', true);
+        }else {
+            $('.select_modify').prop('checked', false);
+        }
+        $('input[value='+doc+']').prop('checked',true);
+        $('.end_time').val(time);
+        inst.open();
+    });
+
+    //修改信息提交
+    $('.ok').click(function () {
+        mdui.confirm('确定修改吗',
+            function(){
+                var number = $('.modify_number').text();
+                var info= $('.modify_info').val();  //修改后的备注
+                var endtime= $('.end_time').val();   //修改后的截止时间
+                var modify = $('input[name="modify"]:checked').val()?$('input[name="modify"]:checked').val():1;   //修改后的是否支持修改
+                var doc = $('input[name="group1"]:checked').val();  //修改后的提交方式
+                $.post('/index.php/index/collect/modify',{number:number,info:info,endtime:endtime,modify:modify,doc:doc},function (json) {
+                 var data = JSON.parse(json)
+                  if(data.result == 1){
+                      mdui.snackbar({
+                          message: '修改成功'
+                      });
+                      init();
+                  }else {
+                      mdui.snackbar({
+                          message: data.tips
+                      })
+                  }
+                });
+            },
+            function(){
+                var inst = new mdui.Dialog('#modify',{modal:true});
+                inst.open();
+            }
+        ,{confirmText:"确定",cancelText:"取消"});
+    });
+
+    //更多表单详情信息框
+    $('.form_list').on('click',".more",function () {
+        var inst = new mdui.Dialog('#form_info');
+        var number = $(this).prevAll().children('.number').text(); //重要
+        var title = $(this).prevAll().children('.title').text();
+        var info = $(this).prevAll().children('.info').text();
+        var endtime = $(this).prevAll().children('.endtimeA').children('.endtimeB').text();
+        var modify =  $(this).prevAll().children('.node').children('.modify').text();
+        var doc =  $(this).prevAll().children('.node').children('.doc').text();
+        var url =  $(this).prevAll().children('.node').children('.url').text();
+        var send =  $(this).prevAll().children('.node').children('.send').text();
+
+        $('.info_number').text(number);  //编号
+        $('.info_title').text("题目:"+title);  //标题
+        $('.info_title_info').text("题目描述:"+info);  //标题备注
+        $('.info_is_modify').text(function (){ switch (modify) {
+            case '1': return "是否支持修改:否";
+            case '2': return "是否支持修改:是";
+        }});  //是否支持修改
+        $('.info_is_doc').text(function (){ switch (doc) {
+            case '1': return "是否支持提交文档:不允许";
+            case '2': return "是否支持提交文档:只允许文档";
+            case '3': return "是否支持提交文档:都允许";
+        }});  //是否支持修改
+        $('.info_is_send').text("谁可以提交:"+send);  //谁可以提交
+        $('.info_end_time').text("截止时间:"+endtime);  //截止时间
+        $('.info_url').html("提交地址：<input readonly id='copy' class='mdui-textfield-input' value="+url+">");  //截止时间
+        $('.open').click(function () {
+            window.open(url);  //进入表单填写地址
+        });
+        inst.open();  //
+    });
+
+    //查看表单提交数据
+    $('.form_list').on('click',".form_info",function () {
+        var number = $(this).children('.number').text();
+        window.open('/index.php/index/collect/formData/shareID/'+number);
+    });
+
+    //删除表单提交
+    $('.delete').click(function () {
+        mdui.confirm('确定删除吗',
+            function(){
+                var number = $('.info_number').text();
+                $.post('/index.php/index/collect/delete',{number:number},function (json) {
+                    var data =JSON.parse(json);
+                   //  console.log(data.code);
+                     if(data.code){
+                         init();
+                         mdui.snackbar({
+                             message: data.message
+                         });
+                     }else {
+                         mdui.snackbar({
+                             message: data.message
+                         });
+                     }
+                });
+            },
+            function(){
+                var inst = new mdui.Dialog('#form_info',{modal:true});
+                inst.open();
+            }
+        ,{confirmText:"确定",cancelText:"取消"});
+    });
+
+    //复制链接
+    $('.info_url').click(function () {
+        var url = $('#copy');
+        url.select();
+        var bool = document.execCommand("Copy",true);
+        if(bool){
+            mdui.snackbar({
+                message: "复制成功"
+            });
+        }else {
+            mdui.snackbar({
+                message: "复制失败 请手动复制"
+            });
+        }
+    });
+
+</script>
